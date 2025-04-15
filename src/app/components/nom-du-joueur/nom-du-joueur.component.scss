@@ -1,0 +1,32 @@
+.contentNomDuJoueur{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+  h2 {
+    font-size: 1.5rem;
+    font-family: var(--font-1);
+  }
+
+  #inputNomJoueur{
+    width: 30rem;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--color-3);
+    color: var(--color-4);
+    font-size: 1rem;
+    box-shadow: inset 0px 0px 7px 0px black;
+
+
+  }
+
+  #inputNomJoueur::placeholder {
+    color: var(--color-4);
+    opacity: 0.7;
+  }
+}

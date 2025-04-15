@@ -1,0 +1,18 @@
+<div class="contentGestionPoint">
+  <p class="statName">{{ statName }}</p>
+  <span class="select">
+    <button class="btnAddRem" (click)="addPoints()">+</button>
+    <p class="statNum">
+      {{ statValue }}
+    </p>
+    <button class="btnAddRem" (click)="removePoints()">-</button>
+  </span>
+  <p class="statNum">
+    {{ statFinalPoints }}
+  </p>
+  <p class="statNum">
+    (
+    {{ additionnalPoints }}
+    )
+  </p>
+</div>

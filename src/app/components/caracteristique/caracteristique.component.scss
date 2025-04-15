@@ -1,0 +1,84 @@
+.contentSelect {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  .contentSelectoStat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 65rem;
+    height: auto;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
+  .StatistiqueSelector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35rem;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: var(--color-1);
+    font-family: var(--font-1);
+    font-size: 1rem;
+    color: white;
+    transition: 0.3s;
+    padding: 2rem;
+  }
+  .contentBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: auto;
+    height: auto;
+    .valideStat {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 12rem;
+      height: 3rem;
+      border-radius: 10px;
+      background-color: var(--color-3);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--color-4);
+      cursor: pointer;
+      border: none;
+      padding: 2rem;
+
+      &:hover {
+        box-shadow: inset 0px 0px 4px 0px black;
+      }
+    }
+
+    .totalPoint {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 12rem;
+      height: 3rem;
+      border-radius: 10px;
+      background-color: var(--color-3);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.5rem;
+
+      color: white;
+      padding: 2rem;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+<section class="containerAll">
+  <div
+    cdkDropList
+    #allStatList="cdkDropList"
+    [cdkDropListConnectedTo]="[
+      charismeList,
+      sagesseList,
+      intelligenceList,
+      constitutionList,
+      dexteriteList,
+      forceList
+    ]"
+    [cdkDropListData]="listeStat !== null ? listeStat : []"
+    class="container"
+    (cdkDropListDropped)="drop($event, 'allStatList')"
+  >
+    <div
+      *ngIf="listeStatMemoire.length !== listeStatInitiale.length"
+      class="containerStat"
+    >
+      <div
+        cdkDrag
+        *ngFor="let stat of listeStat; let i = index"
+        class="draggable-item"
+      >
+        <p>
+          {{ stat }}
+        </p>
+        <p>(Bonus: {{ listeStatBonus[i] }})</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contentInputAttribute">
+    <span>
+      <div
+        cdkDropList
+        #forceList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="force !== null ? [force] : []"
+        (cdkDropListDropped)="drop($event, 'force')"
+        class="dropAttribute"
+      >
+        Force
+        <div cdkDrag *ngIf="force !== null" class="draggable-item">
+          {{ force }}
+        </div>
+      </div>
+
+      <div
+        cdkDropList
+        #dexteriteList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="dexterite !== null ? [dexterite] : []"
+        (cdkDropListDropped)="drop($event, 'dexterite')"
+        class="dropAttribute"
+      >
+        Dexterite
+        <div cdkDrag *ngIf="dexterite !== null" class="draggable-item">
+          {{ dexterite }}
+        </div>
+      </div>
+
+      <div
+        cdkDropList
+        #constitutionList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="constitution !== null ? [constitution] : []"
+        (cdkDropListDropped)="drop($event, 'constitution')"
+        class="dropAttribute"
+      >
+        Constitution
+        <div cdkDrag *ngIf="constitution !== null" class="draggable-item">
+          {{ constitution }}
+        </div>
+      </div>
+
+      <div
+        cdkDropList
+        #intelligenceList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="intelligence !== null ? [intelligence] : []"
+        (cdkDropListDropped)="drop($event, 'intelligence')"
+        class="dropAttribute"
+      >
+        Intelligence
+        <div cdkDrag *ngIf="intelligence !== null" class="draggable-item">
+          {{ intelligence }}
+        </div>
+      </div>
+
+      <div
+        cdkDropList
+        #sagesseList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="sagesse !== null ? [sagesse] : []"
+        (cdkDropListDropped)="drop($event, 'sagesse')"
+        class="dropAttribute"
+      >
+        Sagesse
+        <div cdkDrag *ngIf="sagesse !== null" class="draggable-item">
+          {{ sagesse }}
+        </div>
+      </div>
+
+      <div
+        cdkDropList
+        #charismeList="cdkDropList"
+        [cdkDropListConnectedTo]="[allStatList]"
+        [cdkDropListData]="charisme !== null ? [charisme] : []"
+        (cdkDropListDropped)="drop($event, 'charisme')"
+        class="dropAttribute"
+      >
+        Charisme
+        <div cdkDrag *ngIf="charisme !== null" class="draggable-item">
+          {{ charisme }}
+        </div>
+      </div>
+    </span>
+    <button (click)="resetPlacement()" class="btnReset">Reset placement</button>
+  </div>
+</section>

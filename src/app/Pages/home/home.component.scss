@@ -1,0 +1,25 @@
+
+
+.contentPageHome {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.contentHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-1);
+    font-size: 6rem;
+
+    form-perso{
+        height: 100%;
+        width: 100%;
+    }
+
+
+}

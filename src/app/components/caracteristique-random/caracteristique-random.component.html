@@ -1,0 +1,9 @@
+<section class="contentAttributionRandomStat">
+  <random-stat (statChange)="updateStat($event)" (statFinalAdditionnalPointsRandom)="updateStatBonus($event)"></random-stat>
+  <data-stat-drop
+    [listeStat]="listStatCara"
+    [listeStatBonus]="statBonusFinalCara"
+    (statSelectedRandom)="updateStat($event)"
+    (statBonusSelectedRandom)="handleStatFinalAdditionnalPointsRandom($event)"
+  ></data-stat-drop>
+</section>
