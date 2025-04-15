@@ -1,13 +1,12 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PtsStatComponent } from '../pts-stat/pts-stat.component';
-import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
-import { EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'caracteristique',
-    imports: [PtsStatComponent, BtnRandomStatComponent],
-    templateUrl: './caracteristique.component.html',
-    styleUrl: './caracteristique.component.scss'
+  selector: 'caracteristique',
+  standalone: true,
+  imports: [PtsStatComponent],
+  templateUrl: './caracteristique.component.html',
+  styleUrl: './caracteristique.component.scss',
 })
 export class CaracteristiqueComponent {
   selectedStat?: number = 10;
@@ -27,7 +26,6 @@ export class CaracteristiqueComponent {
   statBonusFinal: number[] = [];
 
   totalPoints = 12;
-
 
   ngOnInit() {}
 
@@ -71,13 +69,11 @@ export class CaracteristiqueComponent {
     console.log('statBonusFinal', this.statBonusFinal);
   }
 
-
-
   validate() {
     console.log('validate');
     this.statSelected.emit(this.statFinal);
     this.statBonusAdd.emit(this.statBonusFinal);
-    console.log("finish", this.finish);
+    console.log('finish', this.finish);
     this.finish.emit(true);
   }
 }

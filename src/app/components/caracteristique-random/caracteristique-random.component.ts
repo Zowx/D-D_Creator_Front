@@ -1,14 +1,14 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.component';
 import { DataStatDropComponent } from '../data-stat-drop/data-stat-drop.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'caracteristique-random',
-    imports: [BtnRandomStatComponent, DataStatDropComponent, DragDropModule],
-    templateUrl: './caracteristique-random.component.html',
-    styleUrl: './caracteristique-random.component.scss'
+  selector: 'caracteristique-random',
+  standalone: true,
+  imports: [BtnRandomStatComponent, DataStatDropComponent, DragDropModule],
+  templateUrl: './caracteristique-random.component.html',
+  styleUrl: './caracteristique-random.component.scss',
 })
 export class CaracteristiqueRandomComponent {
   listStatCara: number[] = [];

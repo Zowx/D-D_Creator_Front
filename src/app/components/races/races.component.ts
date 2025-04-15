@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecupRaceService } from '../../services/recup-race.service';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, CommonModule } from '@angular/common';
 import { IRaces, IAsi } from '../../interfaces/iraces';
 
-import { CommonModule } from '@angular/common';
-
 @Component({
-    selector: 'races',
-    imports: [CommonModule, NgFor, NgIf],
-    templateUrl: './races.component.html',
-    styleUrl: './races.component.scss'
+  selector: 'races',
+  standalone: true,
+  imports: [CommonModule, NgFor],
+  templateUrl: './races.component.html',
+  styleUrl: './races.component.scss',
 })
 export class RacesComponent {
   resultRace: IRaces[] = [];
@@ -23,7 +22,7 @@ export class RacesComponent {
 
   @Output() selectItem = new EventEmitter<string>();
 
-  constructor(private recupRaceService: RecupRaceService) {}
+  constructor(private readonly recupRaceService: RecupRaceService) {}
   ngOnInit() {
     this.loadRaces();
   }
@@ -40,10 +39,9 @@ export class RacesComponent {
     });
   }
 
-  choiceRace(race: any, name : string) {
+  choiceRace(race: any, name: string) {
     if (!race?.target?.innerText) return;
     this.selectedRace = name;
     this.selectItem.emit(name);
-    
   }
 }

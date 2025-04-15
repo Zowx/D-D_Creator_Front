@@ -1,11 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'random-stat',
-    imports: [NgIf],
-    templateUrl: './btn-random-stat.component.html',
-    styleUrl: './btn-random-stat.component.scss'
+  selector: 'random-stat',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './btn-random-stat.component.html',
+  styleUrl: './btn-random-stat.component.scss',
 })
 export class BtnRandomStatComponent {
   totalPoints: number = 27;

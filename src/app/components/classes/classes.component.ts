@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecupClasseService } from '../../services/recup-classe.service';
 import { Iclasses } from '../../interfaces/iclasses';
-import { NgFor } from '@angular/common';
-import { CommonModule } from '@angular/common';
+import { NgFor, CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'classes',
-    imports: [CommonModule, NgFor],
-    templateUrl: './classes.component.html',
-    styleUrl: './classes.component.scss'
+  selector: 'classes',
+  standalone: true,
+  imports: [CommonModule, NgFor],
+  templateUrl: './classes.component.html',
+  styleUrl: './classes.component.scss',
 })
 export class ClassesComponent {
   resultClasse: Iclasses[] = [];
@@ -19,7 +19,7 @@ export class ClassesComponent {
 
   @Output() selectItem = new EventEmitter<string>();
 
-  constructor(private recupClasseService: RecupClasseService) {}
+  constructor(private readonly recupClasseService: RecupClasseService) {}
   ngOnInit() {
     this.loadClasses();
   }

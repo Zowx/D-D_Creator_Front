@@ -1,15 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RecupHistoriqueService } from '../../services/recup-historique.service';
 import { IHistorique } from '../../interfaces/ihistorique';
-import { CommonModule } from '@angular/common';
-import { NgFor } from '@angular/common';
-
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'historique',
-    imports: [CommonModule, NgFor],
-    templateUrl: './historique.component.html',
-    styleUrl: './historique.component.scss'
+  selector: 'historique',
+  standalone: true,
+  imports: [CommonModule, NgFor],
+  templateUrl: './historique.component.html',
+  styleUrl: './historique.component.scss',
 })
 export class HistoriqueComponent {
   resultHistorique: IHistorique[] = [];
@@ -20,7 +19,9 @@ export class HistoriqueComponent {
 
   @Output() selectItem = new EventEmitter<string>();
 
-  constructor(private recupHistoriqueService: RecupHistoriqueService) {}
+  constructor(
+    private readonly recupHistoriqueService: RecupHistoriqueService
+  ) {}
 
   ngOnInit() {
     this.loadHistorique();
@@ -42,5 +43,4 @@ export class HistoriqueComponent {
     this.selectItem.emit(name);
     this.selectedHistorique = name;
   }
-
 }

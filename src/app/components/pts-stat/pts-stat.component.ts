@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'pts-stat',
-    imports: [],
-    templateUrl: './pts-stat.component.html',
-    styleUrl: './pts-stat.component.scss'
+  selector: 'pts-stat',
+  standalone: true,
+  templateUrl: './pts-stat.component.html',
+  styleUrl: './pts-stat.component.scss',
 })
 export class PtsStatComponent {
   @Input() statName: string = '';
@@ -16,7 +16,6 @@ export class PtsStatComponent {
   @Output() statValueChange = new EventEmitter<number>();
 
   @Output() statFinalAdditionnalPoints = new EventEmitter<number>();
-
 
   statValue = 10;
 
@@ -69,7 +68,4 @@ export class PtsStatComponent {
       }
     }
   }
-
-
-  
 }

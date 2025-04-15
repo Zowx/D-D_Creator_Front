@@ -11,21 +11,22 @@ import { NomDuPersoComponent } from '../nom-du-perso/nom-du-perso.component';
 import { NomDuJoueurComponent } from '../nom-du-joueur/nom-du-joueur.component';
 
 @Component({
-    selector: 'form-perso',
-    imports: [
-        ClassesComponent,
-        RacesComponent,
-        HistoriqueComponent,
-        CaracteristiqueComponent,
-        CaracteristiqueRandomComponent,
-        NgIf,
-        DragDropModule,
-        AlignementComponent,
-        NomDuPersoComponent,
-        NomDuJoueurComponent,
-    ],
-    templateUrl: './form-perso.component.html',
-    styleUrl: './form-perso.component.scss'
+  selector: 'form-perso',
+  standalone: true,
+  imports: [
+    ClassesComponent,
+    RacesComponent,
+    HistoriqueComponent,
+    CaracteristiqueComponent,
+    CaracteristiqueRandomComponent,
+    NgIf,
+    DragDropModule,
+    AlignementComponent,
+    NomDuPersoComponent,
+    NomDuJoueurComponent,
+  ],
+  templateUrl: './form-perso.component.html',
+  styleUrl: './form-perso.component.scss',
 })
 export class FormPersoComponent {
   perso = {
@@ -125,7 +126,6 @@ export class FormPersoComponent {
     this.statVisible = true;
   }
 
-
   convertFinish(event: any) {
     if (typeof event === 'boolean') {
       this.finish = event;
@@ -134,7 +134,7 @@ export class FormPersoComponent {
   }
 
   toggleVisibilityBtnFinish() {
-    if(this.finish){
+    if (this.finish) {
       this.btnfinishVisible = true;
     }
   }
@@ -145,5 +145,4 @@ export class FormPersoComponent {
     this.statRandomVisible = false;
     this.statVisible = false;
   }
-
 }

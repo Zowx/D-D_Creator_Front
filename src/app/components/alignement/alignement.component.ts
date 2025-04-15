@@ -1,16 +1,12 @@
-import { Component } from '@angular/core';
-import { Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'alignementSelector',
-    imports: [],
-    templateUrl: './alignement.component.html',
-    styleUrl: './alignement.component.scss'
+  selector: 'alignementSelector',
+  standalone: true,
+  templateUrl: './alignement.component.html',
+  styleUrl: './alignement.component.scss',
 })
 export class AlignementComponent {
-
   selectedAlignment = 'Neutre';
 
   @Output() selectItem = new EventEmitter<string>();
@@ -20,6 +16,4 @@ export class AlignementComponent {
     this.selectedAlignment = selectItem.value;
     this.selectItem.emit(this.selectedAlignment);
   }
-
-
 }

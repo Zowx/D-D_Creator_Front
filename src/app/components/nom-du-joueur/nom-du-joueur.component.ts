@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-import { Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'nom-du-joueur',
-    imports: [],
-    templateUrl: './nom-du-joueur.component.html',
-    styleUrl: './nom-du-joueur.component.scss'
+  selector: 'nom-du-joueur',
+  standalone: true,
+  templateUrl: './nom-du-joueur.component.html',
+  styleUrl: './nom-du-joueur.component.scss',
 })
 export class NomDuJoueurComponent {
   userName = '';
