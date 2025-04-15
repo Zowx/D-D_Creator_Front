@@ -6,11 +6,10 @@ import { NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'historique',
-  standalone: true,
-  imports: [CommonModule, NgFor],
-  templateUrl: './historique.component.html',
-  styleUrl: './historique.component.scss'
+    selector: 'historique',
+    imports: [CommonModule, NgFor],
+    templateUrl: './historique.component.html',
+    styleUrl: './historique.component.scss'
 })
 export class HistoriqueComponent {
   resultHistorique: IHistorique[] = [];

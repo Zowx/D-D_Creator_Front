@@ -5,11 +5,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'caracteristique-random',
-  standalone: true,
-  imports: [BtnRandomStatComponent, DataStatDropComponent, DragDropModule],
-  templateUrl: './caracteristique-random.component.html',
-  styleUrl: './caracteristique-random.component.scss',
+    selector: 'caracteristique-random',
+    imports: [BtnRandomStatComponent, DataStatDropComponent, DragDropModule],
+    templateUrl: './caracteristique-random.component.html',
+    styleUrl: './caracteristique-random.component.scss'
 })
 export class CaracteristiqueRandomComponent {
   listStatCara: number[] = [];

@@ -3,11 +3,10 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'nom-du-joueur',
-  standalone: true,
-  imports: [],
-  templateUrl: './nom-du-joueur.component.html',
-  styleUrl: './nom-du-joueur.component.scss',
+    selector: 'nom-du-joueur',
+    imports: [],
+    templateUrl: './nom-du-joueur.component.html',
+    styleUrl: './nom-du-joueur.component.scss'
 })
 export class NomDuJoueurComponent {
   userName = '';

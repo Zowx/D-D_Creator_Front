@@ -6,11 +6,10 @@ import { IRaces, IAsi } from '../../interfaces/iraces';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'races',
-  standalone: true,
-  imports: [CommonModule, NgFor, NgIf],
-  templateUrl: './races.component.html',
-  styleUrl: './races.component.scss',
+    selector: 'races',
+    imports: [CommonModule, NgFor, NgIf],
+    templateUrl: './races.component.html',
+    styleUrl: './races.component.scss'
 })
 export class RacesComponent {
   resultRace: IRaces[] = [];

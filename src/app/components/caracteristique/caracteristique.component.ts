@@ -4,11 +4,10 @@ import { BtnRandomStatComponent } from '../btn-random-stat/btn-random-stat.compo
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'caracteristique',
-  standalone: true,
-  imports: [PtsStatComponent, BtnRandomStatComponent],
-  templateUrl: './caracteristique.component.html',
-  styleUrl: './caracteristique.component.scss',
+    selector: 'caracteristique',
+    imports: [PtsStatComponent, BtnRandomStatComponent],
+    templateUrl: './caracteristique.component.html',
+    styleUrl: './caracteristique.component.scss'
 })
 export class CaracteristiqueComponent {
   selectedStat?: number = 10;

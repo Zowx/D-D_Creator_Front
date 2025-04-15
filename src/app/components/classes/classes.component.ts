@@ -5,11 +5,10 @@ import { NgFor } from '@angular/common';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'classes',
-  standalone: true,
-  imports: [CommonModule, NgFor],
-  templateUrl: './classes.component.html',
-  styleUrl: './classes.component.scss',
+    selector: 'classes',
+    imports: [CommonModule, NgFor],
+    templateUrl: './classes.component.html',
+    styleUrl: './classes.component.scss'
 })
 export class ClassesComponent {
   resultClasse: Iclasses[] = [];

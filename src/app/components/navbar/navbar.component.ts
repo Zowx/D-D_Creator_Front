@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'navbar',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+    selector: 'navbar',
+    imports: [RouterOutlet, RouterLink, RouterModule],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 

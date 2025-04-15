@@ -1,11 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'pts-stat',
-  standalone: true,
-  imports: [],
-  templateUrl: './pts-stat.component.html',
-  styleUrl: './pts-stat.component.scss',
+    selector: 'pts-stat',
+    imports: [],
+    templateUrl: './pts-stat.component.html',
+    styleUrl: './pts-stat.component.scss'
 })
 export class PtsStatComponent {
   @Input() statName: string = '';

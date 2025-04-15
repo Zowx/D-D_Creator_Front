@@ -5,11 +5,10 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'data-stat-drop',
-  standalone: true,
-  imports: [DragDropModule, CommonModule],
-  templateUrl: './data-stat-drop.component.html',
-  styleUrl: './data-stat-drop.component.scss',
+    selector: 'data-stat-drop',
+    imports: [DragDropModule, CommonModule],
+    templateUrl: './data-stat-drop.component.html',
+    styleUrl: './data-stat-drop.component.scss'
 })
 export class DataStatDropComponent {
   @Input() set listeStat(value: number[]) {

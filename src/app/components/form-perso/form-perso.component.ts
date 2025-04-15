@@ -11,22 +11,21 @@ import { NomDuPersoComponent } from '../nom-du-perso/nom-du-perso.component';
 import { NomDuJoueurComponent } from '../nom-du-joueur/nom-du-joueur.component';
 
 @Component({
-  selector: 'form-perso',
-  standalone: true,
-  imports: [
-    ClassesComponent,
-    RacesComponent,
-    HistoriqueComponent,
-    CaracteristiqueComponent,
-    CaracteristiqueRandomComponent,
-    NgIf,
-    DragDropModule,
-    AlignementComponent,
-    NomDuPersoComponent,
-    NomDuJoueurComponent,
-  ],
-  templateUrl: './form-perso.component.html',
-  styleUrl: './form-perso.component.scss',
+    selector: 'form-perso',
+    imports: [
+        ClassesComponent,
+        RacesComponent,
+        HistoriqueComponent,
+        CaracteristiqueComponent,
+        CaracteristiqueRandomComponent,
+        NgIf,
+        DragDropModule,
+        AlignementComponent,
+        NomDuPersoComponent,
+        NomDuJoueurComponent,
+    ],
+    templateUrl: './form-perso.component.html',
+    styleUrl: './form-perso.component.scss'
 })
 export class FormPersoComponent {
   perso = {

@@ -7,11 +7,10 @@ import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, CreationPersoComponent, DragDropModule, NavbarComponent, RouterLink, RouterModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, CreationPersoComponent, DragDropModule, NavbarComponent, RouterLink, RouterModule],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'D-DCreation_ProjetFront';

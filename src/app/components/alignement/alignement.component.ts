@@ -4,11 +4,10 @@ import { EventEmitter } from '@angular/core';
 
 
 @Component({
-  selector: 'alignementSelector',
-  standalone: true,
-  imports: [],
-  templateUrl: './alignement.component.html',
-  styleUrl: './alignement.component.scss'
+    selector: 'alignementSelector',
+    imports: [],
+    templateUrl: './alignement.component.html',
+    styleUrl: './alignement.component.scss'
 })
 export class AlignementComponent {
 
