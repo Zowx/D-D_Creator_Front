@@ -1,4 +1,19 @@
 <div class="character-list-page">
   <h1>Character List</h1>
   <p>Here you can view all the characters.</p>
+
+  <div
+    class="character-form-container"
+    *ngIf="showForm"
+    style="
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    "
+  >
+    <h2>Ajouter un nouveau personnage</h2>
+    <app-form></app-form>
+  </div>
 </div>
