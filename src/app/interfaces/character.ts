@@ -17,4 +17,7 @@ export interface Character {
   defauts: string;
   allies: string;
   capacites: string;
+  historique?: string;
+  classe?: string;
+  race?: string;
 }

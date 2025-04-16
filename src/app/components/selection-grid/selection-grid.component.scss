@@ -1,0 +1,77 @@
+.selection-grid-container {
+    padding: 20px 0;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .selection-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+
+        .option-card {
+            background-color: #782f40; // Couleur bordeaux proche de vos images
+            color: white;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            &.selected {
+                background-color: #c5211b; // Rouge pour l'option sélectionnée (comme "Héros du peuple" ou "Guerrier")
+                transform: translateY(-3px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            img {
+                max-width: 64px;
+                max-height: 64px;
+                margin-bottom: 12px;
+            }
+
+            .option-label {
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            .option-description {
+                font-size: 0.9rem;
+                margin-top: 8px;
+                opacity: 0.9;
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .selection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .selection-grid {
+        grid-template-columns: 1fr;
+    }
+}
