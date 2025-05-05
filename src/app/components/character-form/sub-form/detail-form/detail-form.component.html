@@ -1,0 +1,143 @@
+<form class="form-detail" [formGroup]="formDetail" (ngSubmit)="onSubmit()">
+<div class="form-grid">
+    <div class="left-column">
+      <div class="form-group">
+        <h2>Nom</h2>
+        <input
+          type="text"
+          name="nom"
+          placeholder="Nom du personnage"
+        />
+      </div>
+
+      <div class="form-group">
+        <h2>Sexe / Alignement / Âge réel</h2>
+        <div class="form-row">
+          <select name="sexe">
+            <option *ngFor="let option of sexeOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+          <select name="alignement">
+            <option *ngFor="let option of alignementOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+          <input
+            type="number"
+            name="age"
+            placeholder="Âge"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h2>Taille / Poids / PX</h2>
+        <div class="form-row">
+          <input
+            type="text"
+            name="taille"
+            placeholder="1,75 m"
+          />
+          <input
+            type="text"
+            name="poids"
+            placeholder="80 kg"
+          />
+          <input
+            type="number"
+            name="px"
+            placeholder="0"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h2>Yeux / Peau / Cheveux</h2>
+        <div class="form-row">
+          <input
+            type="text"
+            name="yeux"
+            placeholder="Yeux"
+          />
+          <input
+            type="text"
+            name="peau"
+            placeholder="Peau"
+          />
+          <input
+            type="text"
+            name="cheveux"
+            placeholder="Cheveux"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h2>Apparence du personnage</h2>
+        <textarea
+          rows="5"
+          name="apparence"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Histoire du personnage</h2>
+        <textarea
+          rows="5"
+          name="histoire"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="form-group">
+        <h2>Traits de personnalité</h2>
+        <textarea
+          rows="5"
+          name="traits"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Idéaux</h2>
+        <textarea
+          rows="5"
+          name="ideaux"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Liens</h2>
+        <textarea
+          rows="5"
+          name="liens"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Défauts</h2>
+        <textarea
+          rows="5"
+          name="defauts"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Alliés et Organisations</h2>
+        <textarea
+          rows="5"
+          name="allies"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <h2>Capacités supplémentaires</h2>
+        <textarea
+          rows="5"
+          name="capacites"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</form>

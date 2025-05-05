@@ -1,0 +1,14 @@
+<div
+    class="form-classes"
+  >
+    <h1>Classes</h1>
+    <p>Choisissez la classes de votre personnage.</p>
+    <div class="classes" [formGroup]="formClassesGroup">
+      <label class="card-classes"
+      *ngFor="let classe of classList; "
+      style="background-color: fuchsia; width: 100px; height: 100px;">
+        <input type="radio" [value]="classe" formControlName="selectedClasse" name="selectedClasse" />
+      {{ classe }}
+    </label>
+    </div>
+  </div>

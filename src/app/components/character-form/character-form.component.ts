@@ -1,37 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Character } from '../../interfaces/character';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  FormArray,
+  Form,
+  FormControl,
+} from '@angular/forms';
+import { NgFor } from '@angular/common';
+import {ClassesComponent} from './classes/classes.component';
+// import {DetailFormComponent} from './sub-form/detail-form/detail-form.component';
 
 @Component({
   selector: 'app-form',
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent],
 })
 export class CharacterFormComponent implements OnInit {
-  character: Character = {
-    nom: '',
-    sexe: 'Homme',
-    alignement: 'Neutre',
-    age: 20,
-    taille: '1,75 m',
-    poids: '80 kg',
-    px: 0,
-    yeux: '',
-    peau: '',
-    cheveux: '',
-    apparence: '',
-    histoire: '',
-    traits: '',
-    ideaux: '',
-    liens: '',
-    defauts: '',
-    allies: '',
-    capacites: '',
-  };
-
+  protected formCharacter!: FormGroup;
+  protected formClasses!: FormGroup;
+  protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
   alignementOptions = [
     'Neutre',
@@ -42,17 +34,56 @@ export class CharacterFormComponent implements OnInit {
     'Loyal Mauvais',
     'Chaotique Mauvais',
   ];
-
-  constructor() {}
+  constructor(
+    private readonly formBuilder: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
-    // Initialisation du composant
+    this.initForm();
   }
 
+  initForm(): void {
+    this.formCharacter = this.formBuilder.group({
+      formClasses: this.formBuilder.group({
+        selectedClasse: new FormControl(null) 
+      }),
+      detailCharacter: this.formBuilder.group({
+        nom: ["", Validators.required],
+        sexe: ["", Validators.required],
+        alignement: ["", Validators.required],
+        age: ["", Validators.required],
+        taille: ["", Validators.required],
+        poids: ["", Validators.required],
+        px: ["", Validators.required],
+        yeux: [""],
+        peau: [""],
+        cheveux: [""],
+        apparence: [""],
+        histoire: [""],
+        traits: [""],
+        ideaux: [""],
+        liens: [""],
+        defauts: [""],
+        allies: [""],
+        capacites: [""],
+      }),
+    });
+  }
+
+  
+  get formClassesGroup(): FormGroup {
+    return this.formCharacter.get('formClasses') as FormGroup;
+  }
+  
+  // get classes(): FormArray {
+  //   return this.formCharacter.get('formClasses.classes') as FormArray;
+  // }
+  
+  get detailCharacter(): FormGroup {
+    return this.formCharacter.get('detail') as FormGroup;
+  }
   onSubmit(): void {
-    console.log('Personnage sauvegardé:', this.character);
-    // Ici vous pourriez appeler un service pour enregistrer le personnage
-    // this.characterService.saveCharacter(this.character);
+    console.log('Personnage sauvegardé');
     alert('Personnage sauvegardé avec succès !');
   }
 }
