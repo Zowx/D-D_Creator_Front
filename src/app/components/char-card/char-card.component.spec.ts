@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectionGridComponent } from './selection-grid.component';
+import { CharCardComponent } from './char-card.component';
 
-describe('SelectionGridComponent', () => {
-  let component: SelectionGridComponent;
-  let fixture: ComponentFixture<SelectionGridComponent>;
+describe('CharCardComponent', () => {
+  let component: CharCardComponent;
+  let fixture: ComponentFixture<CharCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectionGridComponent]
+      imports: [CharCardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectionGridComponent);
+    fixture = TestBed.createComponent(CharCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

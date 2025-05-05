@@ -2,19 +2,8 @@
   <h1>Character List</h1>
   <p>Here you can view all the characters.</p>
 
-  <div
-    class="character-form-container"
-    *ngIf="showForm"
-    style="
-      margin-top: 2rem;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    "
-  >
-    <h2>Ajouter un nouveau personnage</h2>
-
-    <app-selection-grid></app-selection-grid>
-  </div>
+  <section aria-label="Character List" class="character-list">
+    <app-char-card [character]="character" (cardClick)="onCardClick($event)" *ngFor="let character of characters"
+      style="width: 20rem;" />
+  </section>
 </div>

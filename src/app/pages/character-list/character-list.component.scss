@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .character-list-page {
     text-align: center;
     margin: 20px;
@@ -11,4 +13,19 @@
 .character-list-page p {
     font-size: 1.2rem;
     color: #666;
+}
+
+.character-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: $color-background;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    width: 100%;
+    margin: 0 auto;
 }

@@ -1,3 +1,11 @@
+export interface CharacterLite {
+  id: number;
+  name: string;
+  level: number;
+  class: string;
+  race: string;
+}
+
 export interface Character {
   nom: string;
   sexe: string;
