@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'D-DCreation_ProjetFront' title`, () => {
+  it(`should have the 'DD' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('D-DCreation_ProjetFront');
+    expect(app.title).toEqual('DD');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, D-DCreation_ProjetFront');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, DD');
   });
 });

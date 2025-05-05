@@ -1,24 +1,10 @@
 import { Routes } from '@angular/router';
-import {CreationPersoComponent } from './Pages/creation-perso/creation-perso.component';
-import {HomeComponent } from './Pages/home/home.component';
-import {PersonagesComponent } from './Pages/personages/personages.component';
-
+import { HomeComponent } from './pages/home/home.component';
+import { CharacterListComponent } from './pages/character-list/character-list.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
-    {
-        path: "creation-perso",
-        component: CreationPersoComponent
-    },
-    {
-        path: "home",
-        component: HomeComponent
-    },
-    {
-        path: "personages",
-        component: PersonagesComponent
-    },
-    {
-        path: "**",
-        redirectTo: '/home'
-    }
+  { path: '', component: HomeComponent },
+  { path: 'character-list', component: CharacterListComponent },
+  { path: 'profile', component: ProfileComponent },
 ];

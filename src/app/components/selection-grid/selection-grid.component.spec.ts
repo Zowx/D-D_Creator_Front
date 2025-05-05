@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import { SelectionGridComponent } from './selection-grid.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('SelectionGridComponent', () => {
+  let component: SelectionGridComponent;
+  let fixture: ComponentFixture<SelectionGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent]
+      imports: [SelectionGridComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(SelectionGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
