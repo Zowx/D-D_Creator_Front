@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CharacterFormComponent } from '../../components/character-form/character-form.component';
 import { SelectionGridComponent } from '../../components/selection-grid/selection-grid.component';
 
 @Component({
@@ -8,7 +7,7 @@ import { SelectionGridComponent } from '../../components/selection-grid/selectio
   templateUrl: './character-list.component.html',
   styleUrls: ['./character-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, CharacterFormComponent, SelectionGridComponent],
+  imports: [CommonModule, SelectionGridComponent],
 })
 export class CharacterListComponent {
   // Logic for the Character List page can be added here

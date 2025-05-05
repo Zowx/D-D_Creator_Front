@@ -2,12 +2,13 @@
   "name": "dd",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:DD": "node dist/dd/server/server.mjs"
+    "ng": "pnpm exec ng",
+    "start": "pnpm exec ng serve",
+    "build": "pnpm exec ng build",
+    "watch": "pnpm exec ng build --watch --configuration development",
+    "test": "pnpm exec ng test",
+    "serve:ssr:DD": "node dist/dd/server/server.mjs",
+    "clean": "rimraf dist node_modules"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +39,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "rimraf": "6.0.1",
     "typescript": "~5.7.2"
   }
 }
