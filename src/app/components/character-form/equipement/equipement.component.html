@@ -1,0 +1,17 @@
+<div class="form-equipement">
+    <h1>Équipement</h1>
+    <p>Choisissez l'équipement de votre personnage.</p>
+    <div class="equipement" [formGroup]="formEquipementGroup">
+        <select name="arme" >
+            <option *ngFor="let option of armeOptions" [value]="option">
+                {{ option }}
+            </option>
+        </select>
+        <select name="armure">
+        <option *ngFor="let option of armureOptions" [value]="option">
+            {{ option }}
+        </option>
+        </select>
+    </div>
+
+</div>
