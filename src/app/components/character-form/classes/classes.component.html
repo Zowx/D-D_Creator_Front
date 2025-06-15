@@ -7,7 +7,7 @@
       <label class="card-classes"
       *ngFor="let classe of classList; "
       style="background-color: fuchsia; width: 100px; height: 100px;">
-        <input type="radio" [value]="classe" formControlName="selectedClasse" name="selectedClasse" />
+        <input required="true" type="radio" [value]="classe" formControlName="selectedClasse" name="selectedClasse" />
       {{ classe }}
     </label>
     </div>

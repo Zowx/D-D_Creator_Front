@@ -6,6 +6,12 @@
 
   <!-- ================== Classes ================== -->
   <app-classes [formClassesGroup]="formClassesGroup"></app-classes>
+  <!-- ================= Races ================== -->
+   <app-races [formRacesGroup]="formRacesGroup"></app-races> 
+  <!-- ================== Historiques ================== -->
+  <app-historiques [formHistoriquesGroup]="formHistoriquesGroup"></app-historiques>
+  <!-- ================== Langues ================== -->
+  <app-langues [formLanguesGroup]="formLanguesGroup"></app-langues>
   <!-- ================== Detail ================== -->
   <h1>Personnage</h1>
   <p>Définissez les derniers détails du personnage.</p>
@@ -100,6 +106,6 @@
   <!-- <app-classes formArrayName="classes"></app-classes>
   <app-detail-form formArrayName="detail" [formDetail]="formCharacter.get('detail') as FormGroup" /> -->
   <div class="form-actions">
-    <button type="submit">Sauvegarder</button>
+    <button class="btn-save" type="submit" >Sauvegarder</button>
   </div>
 </form>

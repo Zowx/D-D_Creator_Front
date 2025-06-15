@@ -1,0 +1,25 @@
+<div class="form-langues">
+  <h1>Langues</h1>
+  <p>Choisissez les langues que votre personnage peut parler.</p>
+  <div class="langues" [formGroup]="formLanguesGroup">
+    <label
+      class="card-langues"
+      *ngFor="let langue of langueList"
+      style="background-color: aqua; width: 100px; height: 100px"
+    >
+      <input
+        type="checkbox"
+        [value]="langue"
+        [checked]="chosenLangue.includes(langue)"
+        (change)="addLangue($event, langue)"
+      />
+      {{ langue }}
+    </label>
+  </div>
+  <div>
+    <h3>Langues choisies :</h3>
+    <p *ngFor="let langue of chosenLangue">
+      {{ langue }}
+    </p>
+  </div>
+</div>

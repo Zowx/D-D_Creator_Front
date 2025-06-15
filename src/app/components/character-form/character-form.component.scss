@@ -1,3 +1,4 @@
+
 .form-character {
     max-width: 1200px;
     margin: 0 auto;
@@ -45,7 +46,7 @@
     textarea {
         width: 100%;
         padding: 8px 12px;
-        border: 1px solid #ccc;
+        border: 1px solid #cccccc;
         border-radius: 4px;
         font-size: 16px;
         box-sizing: border-box;
@@ -56,22 +57,24 @@
         min-height: 100px;
     }
 
-    .form-actions {
-        display: flex;
-        justify-content: flex-end;
+    
+}
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    .btn-save {
+        background-color: #4a4a4a;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
 
-        button {
-            background-color: #4a4a4a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
 
-            &:hover {
-                background-color: #333;
-            }
+        &:hover {
+            background-color: #333;
         }
-    }
+
+    } 
 }

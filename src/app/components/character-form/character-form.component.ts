@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -11,6 +11,9 @@ import {
 } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import {ClassesComponent} from './classes/classes.component';
+import {RacesComponent} from './races/races.component'
+import {HistoriquesComponent} from './historiques/historiques.component';
+import {LanguesComponent} from './langues/langues.component';
 // import {DetailFormComponent} from './sub-form/detail-form/detail-form.component';
 
 @Component({
@@ -18,11 +21,14 @@ import {ClassesComponent} from './classes/classes.component';
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent],
+  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent, RacesComponent, HistoriquesComponent, LanguesComponent],
 })
 export class CharacterFormComponent implements OnInit {
   protected formCharacter!: FormGroup;
   protected formClasses!: FormGroup;
+  protected formRaces!: FormGroup;
+  protected formHistoriques!: FormGroup;
+  protected formLangues!: FormGroup;
   protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
   alignementOptions = [
@@ -46,6 +52,16 @@ export class CharacterFormComponent implements OnInit {
     this.formCharacter = this.formBuilder.group({
       formClasses: this.formBuilder.group({
         selectedClasse: new FormControl(null) 
+      }),
+      formRaces: this.formBuilder.group({
+        selectedRace: new FormControl(null)
+      }),
+      formHistoriques: this.formBuilder.group({
+        selectedHistorique: new FormControl(null)
+      }),
+      formLangues: this.formBuilder.group({
+        selectedLangue: new FormControl(null),
+        langues: this.formBuilder.array([]) 
       }),
       detailCharacter: this.formBuilder.group({
         nom: ["", Validators.required],
@@ -74,7 +90,15 @@ export class CharacterFormComponent implements OnInit {
   get formClassesGroup(): FormGroup {
     return this.formCharacter.get('formClasses') as FormGroup;
   }
-  
+  get formRacesGroup(): FormGroup {
+    return this.formCharacter.get('formRaces') as FormGroup; 
+  }
+  get formHistoriquesGroup(): FormGroup {
+    return this.formCharacter.get('formHistoriques') as FormGroup;
+  }
+  get formLanguesGroup(): FormGroup {
+    return this.formCharacter.get('formLangues') as FormGroup;
+  }
   // get classes(): FormArray {
   //   return this.formCharacter.get('formClasses.classes') as FormArray;
   // }

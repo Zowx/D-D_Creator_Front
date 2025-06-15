@@ -1,0 +1,12 @@
+<div class="form-races">
+    <h1>Races</h1>
+    <p>Choisissez la race de votre personnage.</p>
+    <div class="races" [formGroup]="formRacesGroup">
+        <label class="card-races"
+        *ngFor="let race of raceList; "
+        style="background-color: green; width: 100px; height: 100px;">
+            <input required="true" type="radio" [value]="race" formControlName="selectedRace" name="selectedRace" />
+            {{race}}
+        </label>
+    </div>
+</div>
