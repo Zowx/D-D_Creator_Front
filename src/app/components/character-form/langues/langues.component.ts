@@ -24,18 +24,24 @@ export class LanguesComponent {
   langueList = ['goblin', 'elfique', 'nain', 'draconique'];
   chosenLangue: string[] = [];
   
-  constructor(private fb: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
 
+  initForm() : void {
+    this.formLanguesGroup = this.formBuilder.group({
+      selectedLangue: new FormControl(null)
+    });
+  }
 
   get langues(): FormArray {  
     return this.formLanguesGroup.get('formLangues.langues') as FormArray;
   }
   ngOnInit(): void {
     if (!this.formLanguesGroup) {
-      this.formLanguesGroup = this.fb.group({
+      this.formLanguesGroup = this.formBuilder.group({
         langues: [[]],
       });
     }
+    this.initForm();
   }
   
   
@@ -44,6 +50,7 @@ export class LanguesComponent {
   }
 
   addLangue(event: any, langue: string) {
+    console.log('Langue selected:', langue);
     const isChecked = event.target.checked;
     if(isChecked){
       if(this.chosenLangue.length >=2) {

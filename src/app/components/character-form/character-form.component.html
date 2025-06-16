@@ -5,105 +5,105 @@
 >
 
   <!-- ================== Classes ================== -->
-  <app-classes [formClassesGroup]="formClassesGroup"></app-classes>
+  <app-classes [formClassesGroup]="formClasses"></app-classes>
   <!-- ================= Races ================== -->
-   <app-races [formRacesGroup]="formRacesGroup"></app-races> 
+   <app-races [formRacesGroup]="formRaces"></app-races> 
   <!-- ================== Historiques ================== -->
-  <app-historiques [formHistoriquesGroup]="formHistoriquesGroup"></app-historiques>
+  <app-historiques [formHistoriquesGroup]="formHistoriques"></app-historiques>
   <!-- ================== Langues ================== -->
-  <app-langues [formLanguesGroup]="formLanguesGroup"></app-langues>
+  <app-langues [formLanguesGroup]="formLangues"></app-langues>
   <!-- ================== Equipement ================== -->
-  <app-equipement [formEquipementGroup]="formEquipementGroup"></app-equipement>
+  <app-equipement [formEquipementGroup]="formEquipement"></app-equipement>
   <!-- ================== Detail ================== -->
   <h1>Personnage</h1>
   <p>Définissez les derniers détails du personnage.</p>
-  <form class="form-detail" [formGroup]="formDetail" (ngSubmit)="onSubmit()">
+  <div class="form-detail" [formGroup]="formDetail">
     <div class="form-grid">
       <div class="left-column">
         <div class="form-group">
           <h2>Nom</h2>
-          <input type="text" name="nom" placeholder="Nom du personnage" />
+          <input type="text" formControlName="nom" placeholder="Nom du personnage" />
         </div>
 
         <div class="form-group">
           <h2>Sexe / Alignement / Âge réel</h2>
           <div class="form-row">
-            <select name="sexe">
+            <select formControlName="sexe">
+              <option value="">Choisir un sexe</option>
               <option *ngFor="let option of sexeOptions" [value]="option">
                 {{ option }}
               </option>
             </select>
-            <select name="alignement">
+            <select formControlName="alignement">
+              <option value="">Choisir un alignement</option>
               <option *ngFor="let option of alignementOptions" [value]="option">
                 {{ option }}
               </option>
             </select>
-            <input type="number" name="age" placeholder="Âge" />
+            <input type="number" formControlName="age" placeholder="Âge" />
           </div>
         </div>
 
         <div class="form-group">
           <h2>Taille / Poids / PX</h2>
           <div class="form-row">
-            <input type="text" name="taille" placeholder="1,75 m" />
-            <input type="text" name="poids" placeholder="80 kg" />
-            <input type="number" name="px" placeholder="0" />
+            <input type="text" formControlName="taille" placeholder="1,75 m" />
+            <input type="text" formControlName="poids" placeholder="80 kg" />
+            <input type="number" formControlName="px" placeholder="0" />
           </div>
-        </div>
-
-        <div class="form-group">
+        </div>        <div class="form-group">
           <h2>Yeux / Peau / Cheveux</h2>
           <div class="form-row">
-            <input type="text" name="yeux" placeholder="Yeux" />
-            <input type="text" name="peau" placeholder="Peau" />
-            <input type="text" name="cheveux" placeholder="Cheveux" />
+            <input type="text" formControlName="yeux" placeholder="Yeux" />
+            <input type="text" formControlName="peau" placeholder="Peau" />
+            <input type="text" formControlName="cheveux" placeholder="Cheveux" />
           </div>
         </div>
 
         <div class="form-group">
           <h2>Apparence du personnage</h2>
-          <textarea rows="5" name="apparence"></textarea>
+          <textarea rows="5" formControlName="apparence"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Histoire du personnage</h2>
-          <textarea rows="5" name="histoire"></textarea>
+          <textarea rows="5" formControlName="histoire"></textarea>
         </div>
       </div>
 
       <div class="right-column">
         <div class="form-group">
           <h2>Traits de personnalité</h2>
-          <textarea rows="5" name="traits"></textarea>
+          <textarea rows="5" formControlName="traits"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Idéaux</h2>
-          <textarea rows="5" name="ideaux"></textarea>
+          <textarea rows="5" formControlName="ideaux"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Liens</h2>
-          <textarea rows="5" name="liens"></textarea>
+          <textarea rows="5" formControlName="liens"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Défauts</h2>
-          <textarea rows="5" name="defauts"></textarea>
+          <textarea rows="5" formControlName="defauts"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Alliés et Organisations</h2>
-          <textarea rows="5" name="allies"></textarea>
+          <textarea rows="5" formControlName="allies"></textarea>
         </div>
 
         <div class="form-group">
           <h2>Capacités supplémentaires</h2>
-          <textarea rows="5" name="capacites"></textarea>
+          <textarea rows="5" formControlName="capacites"></textarea>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 
   <!-- <app-classes formArrayName="classes"></app-classes>
   <app-detail-form formArrayName="detail" [formDetail]="formCharacter.get('detail') as FormGroup" /> -->

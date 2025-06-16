@@ -7,6 +7,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
+import {AlignementService} from '../../../../services/alignement/alignement.service';
 import { Character } from '../../../../interfaces/character';
 
 
@@ -14,7 +15,7 @@ import { Character } from '../../../../interfaces/character';
   selector: 'app-detail-form',
   imports: [
     ReactiveFormsModule,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './detail-form.component.html',
   styleUrl: './detail-form.component.scss'
@@ -23,22 +24,27 @@ export class DetailFormComponent {
   @Input() public formDetail!: FormGroup;
 
   sexeOptions = ['Homme', 'Femme', 'Autre'];
-  alignementOptions = [
-    'Neutre',
-    'Loyal Bon',
-    'Chaotique Bon',
-    'Loyal Neutre',
-    'Chaotique Neutre',
-    'Loyal Mauvais',
-    'Chaotique Mauvais',
-  ];
+  alignementOptions: string[] = [];
   constructor(
     private readonly formBuilder: FormBuilder
+    , private alignementService: AlignementService
   ) {}
 
-
+  loadAlignements() {
+    this.alignementService.getAllAlignements().subscribe({
+      next: (dataAlignements) => {
+       this.alignementOptions = dataAlignements
+       console.log("Les alignements"+this.alignementOptions);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    }
+    );
+  }
 
   ngOnInit(){
+    this.loadAlignements();
   }
 
 

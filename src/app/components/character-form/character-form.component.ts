@@ -15,7 +15,7 @@ import {RacesComponent} from './races/races.component'
 import {HistoriquesComponent} from './historiques/historiques.component';
 import {LanguesComponent} from './langues/langues.component';
 import {EquipementComponent} from './equipement/equipement.component';
-// import {DetailFormComponent} from './sub-form/detail-form/detail-form.component';
+import {AlignementService} from '../../services/alignement/alignement.service';
 
 @Component({
   selector: 'app-form',
@@ -33,21 +33,24 @@ export class CharacterFormComponent implements OnInit {
   protected formEquipement!: FormGroup;
   protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
-  alignementOptions = [
-    'Neutre',
-    'Loyal Bon',
-    'Chaotique Bon',
-    'Loyal Neutre',
-    'Chaotique Neutre',
-    'Loyal Mauvais',
-    'Chaotique Mauvais',
-  ];
+  alignementOptions: string[] = [];
+  // alignementOptions = [
+  //   'Neutre',
+  //   'Loyal Bon',
+  //   'Chaotique Bon',
+  //   'Loyal Neutre',
+  //   'Chaotique Neutre',
+  //   'Loyal Mauvais',
+  //   'Chaotique Mauvais',
+  // ];
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly alignementService: AlignementService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.loadAlignementOptions();
   }
 
   initForm(): void {
@@ -91,8 +94,21 @@ export class CharacterFormComponent implements OnInit {
         capacites: [""],
       }),
     });
+    
+    // Créer formDetail comme référence au sous-groupe
+    this.formDetail = this.formCharacter.get('detailCharacter') as FormGroup;
   }
-
+  
+  loadAlignementOptions(): void {
+    this.alignementService.getAllAlignements().subscribe({
+      next: (data) => {
+        this.alignementOptions = data.map(alignement => alignement.name);
+      },
+      error: (err) => {
+        console.error('Error fetching alignements:', err);
+    }
+    });
+  }
   
   get formClassesGroup(): FormGroup {
     return this.formCharacter.get('formClasses') as FormGroup;
@@ -109,13 +125,12 @@ export class CharacterFormComponent implements OnInit {
   get formEquipementGroup(): FormGroup {
     return this.formCharacter.get('formEquipement') as FormGroup;
   }
-  // get classes(): FormArray {
-  //   return this.formCharacter.get('formClasses.classes') as FormArray;
-  // }
-  
   get detailCharacter(): FormGroup {
     return this.formCharacter.get('detail') as FormGroup;
   }
+
+
+
   onSubmit(): void {
     console.log('Personnage sauvegardé');
     alert('Personnage sauvegardé avec succès !');

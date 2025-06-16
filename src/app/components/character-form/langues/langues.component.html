@@ -12,6 +12,8 @@
         [value]="langue"
         [checked]="chosenLangue.includes(langue)"
         (change)="addLangue($event, langue)"
+        formControlName="selectedLangue"
+        name="selectedLangue"
       />
       {{ langue }}
     </label>

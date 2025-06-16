@@ -3,7 +3,6 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
   FormArray,
   FormControl,
 } from '@angular/forms';
@@ -29,8 +28,21 @@ export class EquipementComponent {
     return this.formEquipementGroup.get('formEquipement.equipements') as FormArray;
   }
 
+  constructor(
+    private readonly formBuilder: FormBuilder
+  ) {
+  }
 
-  ngOnint(): void {}
+  initForm(): void {
+   this.formEquipementGroup = this.formBuilder.group({
+    arme: new FormControl(null),
+    armure: new FormControl(null)
+  });
+  }
+
+  ngOnInit(): void {
+    this.initForm()
+  }
 
   get selectedArme(): FormControl {
     return this.formEquipementGroup.get('selectedArme') as FormControl;

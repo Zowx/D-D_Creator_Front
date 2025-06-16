@@ -23,11 +23,23 @@ export class RacesComponent {
   @Input() formRacesGroup!: FormGroup;
   raceList = ['humain', 'elfe', 'nain', 'halfelin', 'dragonborn', 'tieffelin'];
 
+  constructor(
+    private readonly formBuilder: FormBuilder
+  ) {
+  }
+
+  initForm(): void {
+    this.formRacesGroup = this.formBuilder.group({
+      selectedRace: new FormControl(null)
+    });
+  }
+
   get races(): FormArray {
     return this.formRacesGroup.get('formRaces.races') as FormArray;
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
 
   get selectedRace(): FormControl {

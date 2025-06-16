@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -20,18 +20,25 @@ import { NgFor } from '@angular/common';
   templateUrl: './classes.component.html',
   styleUrl: './classes.component.scss'
 })
-export class ClassesComponent {
+export class ClassesComponent implements OnInit {
   @Input() formClassesGroup!: FormGroup;
   classList = ['paladin', 'sorcier', 'druide'];
-  // constructor(
-  //   private readonly formBuilder: FormBuilder
-  // ) {}
+  constructor(
+    private readonly formBuilder: FormBuilder
+  ) {}
+
+  initForm(): void {
+    this.formClassesGroup = this.formBuilder.group({
+      selectedClasse: new FormControl(null) 
+    });
+  }
 
   get classes(): FormArray {  
     return this.formClassesGroup.get('formClasses.classes') as FormArray;
   }
 
   ngOnInit(): void {
+    this.initForm();
   }
   
   get selectedClasse(): FormControl {
