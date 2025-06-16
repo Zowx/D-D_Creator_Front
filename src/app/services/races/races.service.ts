@@ -19,13 +19,13 @@ export class RacesService {
   }
 
   addRace(race: Race) {
-    return this.http.post<Race>(this.apiUrl + this.name, race);
+    return this.http.post<any>(this.apiUrl + this.name, race);
   }
 
   updateRace(id: string, race: Race) {
-    return this.http.patch<Race>(this.apiUrl + this.name + '/' + id, race);
+    return this.http.patch<any>(this.apiUrl + this.name + '/' + id, race);
   }
   deleteRace(id: string) {
-    return this.http.delete<Race>(this.apiUrl + this.name + '/' + id);
+    return this.http.delete<any>(this.apiUrl + this.name + '/' + id);
   }
 }
