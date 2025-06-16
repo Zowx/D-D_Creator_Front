@@ -1,7 +1,7 @@
 export interface Character {
   nom: string;
   sexe: string;
-  alignement: string;
+  alignment: string;
   age: number;
   taille: string;
   poids: string;

@@ -7,7 +7,7 @@ import {
   FormArray,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
-import {AlignementService} from '../../../../services/alignement/alignement.service';
+import {AlignmentService} from '../../../../services/alignment/alignment.service';
 import { Character } from '../../../../interfaces/character';
 
 
@@ -24,17 +24,17 @@ export class DetailFormComponent {
   @Input() public formDetail!: FormGroup;
 
   sexeOptions = ['Homme', 'Femme', 'Autre'];
-  alignementOptions: string[] = [];
+  alignmentOptions: string[] = [];
   constructor(
     private readonly formBuilder: FormBuilder
-    , private alignementService: AlignementService
+    , private alignmentService: AlignmentService
   ) {}
 
-  loadAlignements() {
-    this.alignementService.getAllAlignements().subscribe({
-      next: (dataAlignements) => {
-       this.alignementOptions = dataAlignements
-       console.log("Les alignements"+this.alignementOptions);
+  loadAlignments() {
+    this.alignmentService.getAllAlignments().subscribe({
+      next: (dataAlignments) => {
+       this.alignmentOptions = dataAlignments
+       console.log("Les alignments"+this.alignmentOptions);
       },
       error: (err) => {
         console.log(err);
@@ -44,7 +44,7 @@ export class DetailFormComponent {
   }
 
   ngOnInit(){
-    this.loadAlignements();
+    this.loadAlignments();
   }
 
 

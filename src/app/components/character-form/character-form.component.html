@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-          <h2>Sexe / Alignement / Âge réel</h2>
+          <h2>Sexe / Alignment / Âge réel</h2>
           <div class="form-row">
             <select formControlName="sexe">
               <option value="">Choisir un sexe</option>
@@ -34,9 +34,9 @@
                 {{ option }}
               </option>
             </select>
-            <select formControlName="alignement">
-              <option value="">Choisir un alignement</option>
-              <option *ngFor="let option of alignementOptions" [value]="option">
+            <select formControlName="alignment">
+              <option value="">Choisir un alignment</option>
+              <option *ngFor="let option of alignmentOptions" [value]="option">
                 {{ option }}
               </option>
             </select>

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AlignementService } from './alignement.service';
+import { AlignmentService } from './alignment.service';
 
-describe('AlignementService', () => {
-  let service: AlignementService;
+describe('AlignmentService', () => {
+  let service: AlignmentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AlignementService);
+    service = TestBed.inject(AlignmentService);
   });
 
   it('should be created', () => {

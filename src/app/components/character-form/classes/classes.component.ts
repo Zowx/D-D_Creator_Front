@@ -3,12 +3,12 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
   FormArray,
   FormControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { NgFor } from '@angular/common';
+import {ClassesService} from '../../../services/classes/classes.service';
 
 @Component({
   selector: 'app-classes',
@@ -25,14 +25,28 @@ import { NgFor } from '@angular/common';
 })
 export class ClassesComponent implements OnInit {
   @Input() formClassesGroup!: FormGroup;
-  classList = ['paladin', 'sorcier', 'druide'];
+  //classList = ['paladin', 'sorcier', 'druide'];
+  classList: string[] = [];
   constructor(
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly classesService: ClassesService
   ) {}
 
   initForm(): void {
     this.formClassesGroup = this.formBuilder.group({
       selectedClasse: new FormControl(null) 
+    });
+  }
+
+  loadClasses() {
+    this.classesService.getClasses().subscribe({
+      next: (dataClasses) => {
+        this.classList = dataClasses.map((classe) => classe.name);
+        console.log("Les classes", this.classList);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -42,6 +56,7 @@ export class ClassesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.loadClasses();
   }
   
   get selectedClasse(): FormControl {

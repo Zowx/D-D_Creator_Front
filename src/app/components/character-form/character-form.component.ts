@@ -15,7 +15,7 @@ import {RacesComponent} from './races/races.component'
 import {HistoriquesComponent} from './historiques/historiques.component';
 import {LanguesComponent} from './langues/langues.component';
 import {EquipementComponent} from './equipement/equipement.component';
-import {AlignementService} from '../../services/alignement/alignement.service';
+import {AlignmentService} from '../../services/alignment/alignment.service';
 
 @Component({
   selector: 'app-form',
@@ -33,8 +33,8 @@ export class CharacterFormComponent implements OnInit {
   protected formEquipement!: FormGroup;
   protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
-  alignementOptions: string[] = [];
-  // alignementOptions = [
+  alignmentOptions: string[] = [];
+  // alignmentOptions = [
   //   'Neutre',
   //   'Loyal Bon',
   //   'Chaotique Bon',
@@ -45,12 +45,12 @@ export class CharacterFormComponent implements OnInit {
   // ];
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly alignementService: AlignementService
+    private readonly alignmentService: AlignmentService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.loadAlignementOptions();
+    this.loadAlignmentOptions();
   }
 
   initForm(): void {
@@ -76,7 +76,7 @@ export class CharacterFormComponent implements OnInit {
       detailCharacter: this.formBuilder.group({
         nom: ["", Validators.required],
         sexe: ["", Validators.required],
-        alignement: ["", Validators.required],
+        alignment: ["", Validators.required],
         age: ["", Validators.required],
         taille: ["", Validators.required],
         poids: ["", Validators.required],
@@ -98,14 +98,14 @@ export class CharacterFormComponent implements OnInit {
     // Créer formDetail comme référence au sous-groupe
     this.formDetail = this.formCharacter.get('detailCharacter') as FormGroup;
   }
-  
-  loadAlignementOptions(): void {
-    this.alignementService.getAllAlignements().subscribe({
+
+  loadAlignmentOptions(): void {
+    this.alignmentService.getAllAlignments().subscribe({
       next: (data) => {
-        this.alignementOptions = data.map(alignement => alignement.name);
+        this.alignmentOptions = data.map(alignment => alignment.name);
       },
       error: (err) => {
-        console.error('Error fetching alignements:', err);
+        console.error('Error fetching alignments:', err);
     }
     });
   }
