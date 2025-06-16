@@ -1,0 +1,46 @@
+import { Race } from './race.model';
+import { Class } from './class.model';
+import { Background } from './background.model';
+import { Alignment } from './alignment.model';
+import { PlayerSkill } from './playerskill.model';
+import { CharacterAbility } from './characterability.model';
+import { CharacterLanguage } from './characterlanguage.model';
+
+export interface Character {
+  id: number;
+  race: Race;
+  raceId: number;
+  class: Class;
+  classId: number;
+  background: Background;
+  backgroundId: number;
+  alignment: Alignment;
+  alignmentId: number;
+  xp: number;
+  level: number;
+  name: string;
+  player: string;
+  AC: number;
+  speed: number;
+  hp: number;
+  max_hp: number;
+  temp_hp: number;
+  personality: string;
+  ideals: string;
+  bonds: string;
+  flaws: string;
+  age: number;
+  height: string;
+  weight: string;
+  eyes: string;
+  skin: string;
+  hair: string;
+  appearance: string;
+  allies: string;
+  backstory: string;
+  treasure: string;
+  traits: string;
+  playerSkills: PlayerSkill[];
+  abilities: CharacterAbility[];
+  languages: CharacterLanguage[];
+}
