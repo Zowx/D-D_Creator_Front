@@ -18,7 +18,10 @@ import { NgFor } from '@angular/common';
     NgFor
   ],
   templateUrl: './classes.component.html',
-  styleUrl: './classes.component.scss'
+   styleUrls: [
+    './classes.component.scss',
+    '../../../shared/shared-style.scss',
+  ]
 })
 export class ClassesComponent implements OnInit {
   @Input() formClassesGroup!: FormGroup;

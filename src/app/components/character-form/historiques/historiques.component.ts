@@ -17,7 +17,7 @@ import { NgFor } from '@angular/common';
     NgFor
   ],
   templateUrl: './historiques.component.html',
-  styleUrl: './historiques.component.scss'
+  styleUrls: ['./historiques.component.scss', '../../../shared/shared-style.scss'],
 })
 export class HistoriquesComponent {
   @Input() formHistoriquesGroup!: FormGroup;

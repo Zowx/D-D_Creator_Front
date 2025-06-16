@@ -17,7 +17,7 @@ import { NgFor } from '@angular/common';
     NgFor
   ],
   templateUrl: './langues.component.html',
-  styleUrl: './langues.component.scss'
+  styleUrls: ['./langues.component.scss', '../../../shared/shared-style.scss'],
 })
 export class LanguesComponent {
   @Input() formLanguesGroup!: FormGroup;
@@ -55,6 +55,7 @@ export class LanguesComponent {
     if(isChecked){
       if(this.chosenLangue.length >=2) {
         event.target.checked = false;
+        alert('Vous ne pouvez choisir que 2 langues.');
         return;
       }
       this.chosenLangue.push(langue);

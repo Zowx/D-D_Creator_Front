@@ -18,7 +18,7 @@ import { Character } from '../../../../interfaces/character';
     CommonModule
   ],
   templateUrl: './detail-form.component.html',
-  styleUrl: './detail-form.component.scss'
+  styleUrls: ['./detail-form.component.scss', '../../../../shared/shared-style.scss'],
 })
 export class DetailFormComponent {
   @Input() public formDetail!: FormGroup;

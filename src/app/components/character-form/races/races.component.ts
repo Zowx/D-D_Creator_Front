@@ -17,7 +17,7 @@ import { NgFor } from '@angular/common';
     NgFor
   ],
   templateUrl: './races.component.html',
-  styleUrl: './races.component.scss'
+  styleUrls: ['./races.component.scss', '../../../shared/shared-style.scss'],
 })
 export class RacesComponent {
   @Input() formRacesGroup!: FormGroup;

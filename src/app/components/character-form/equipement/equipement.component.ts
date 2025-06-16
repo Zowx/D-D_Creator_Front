@@ -17,7 +17,7 @@ import { NgFor } from '@angular/common';
     NgFor
   ],
   templateUrl: './equipement.component.html',
-  styleUrl: './equipement.component.scss'
+  styleUrls: ['./equipement.component.scss','../../../shared/shared-style.scss',],
 })
 export class EquipementComponent {
   @Input() formEquipementGroup!: FormGroup;
