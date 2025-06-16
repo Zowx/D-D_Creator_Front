@@ -14,7 +14,6 @@ import {ClassesComponent} from './classes/classes.component';
 import {RacesComponent} from './races/races.component'
 import {HistoriquesComponent} from './historiques/historiques.component';
 import {LanguesComponent} from './langues/langues.component';
-import {EquipementComponent} from './equipement/equipement.component';
 import {AlignmentService} from '../../services/alignment/alignment.service';
 
 @Component({
@@ -22,7 +21,7 @@ import {AlignmentService} from '../../services/alignment/alignment.service';
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent, RacesComponent, HistoriquesComponent, LanguesComponent, EquipementComponent],
+  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent, RacesComponent, HistoriquesComponent, LanguesComponent],
 })
 export class CharacterFormComponent implements OnInit {
   protected formCharacter!: FormGroup;

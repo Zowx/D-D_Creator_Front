@@ -11,7 +11,7 @@ export class RacesService {
   constructor(private http: HttpClient) {}
 
   getRaces() {
-    return this.http.get<Race>(this.apiUrl + this.name);
+    return this.http.get<Race[]>(this.apiUrl + this.name);
   }
 
   getRaceById(id: string) {
