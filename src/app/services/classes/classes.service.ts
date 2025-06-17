@@ -13,18 +13,17 @@ export class ClassesService {
   getClasses() {
     return this.http.get<Class[]>(this.apiUrl + this.name);
   }
-
   getClassById(id: string) {
-    return this.http.get<Class>(this.apiUrl + this.name + '/:' + id);
+    return this.http.get<Class>(this.apiUrl + this.name + '/' + id);
   }
   
   addClass(classData: Class) {
     return this.http.post<Class>(this.apiUrl + this.name, classData);
   }
   updateClass(id: string, classData: Class) {
-    return this.http.patch<Class>(this.apiUrl + this.name + '/:' + id, classData);
+    return this.http.patch<Class>(this.apiUrl + this.name + '/' + id, classData);
   }
   deleteClass(id: string) {
-    return this.http.delete<Class>(this.apiUrl + this.name + '/:' + id);
+    return this.http.delete<Class>(this.apiUrl + this.name + '/' + id);
   }
 }

@@ -1,14 +1,212 @@
 .main-container {
-    background-color: fuchsia;
-    border: 20px solid rgb(40, 178, 74);
-    width: auto;
-    height: auto;
+  padding: 20px;
+  background-color: #c9c9c9;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
 }
 
-.common-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px;
+// Styles pour les détails sélectionnés
+.selected-details {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: apparition 0.3s ease-out;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.4em;
+  }
+}
+
+// Grille d'informations générique
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+// Items d'information générique
+.info-item {
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  border-left: 4px solid;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  strong {
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 600;
+  }
+
+  .value {
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+}
+
+// Container pour les badges 
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+// Style générique pour les badges
+.badge {
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+// Message quand aucune sélection
+.no-selection-message {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  border: 1px dashed #ccc;
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-style: italic;
+  }
+}
+
+// Styles pour les selects
+.form-select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    border-color:  #ccc;
+  }
+}
+
+// Styles pour les sections de sous-sélection
+.sub-selection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+
+  h4 {
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  select {
+    margin-top: 8px;
+  }
+}
+
+// Styles pour les détails des sous-sélections
+.selected-sub-details {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 6px;
+  animation: apparition 0.3s ease-out;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .sub-info {
+    p {
+      margin: 5px 0;
+      font-size: 0.95em;
+        strong {
+        color: #333;
+      }
+    }
+  }
+}
+
+// Animation commune
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Style de bouton 
+button, .btn {
+  padding: 10px 20px;
+  background-color: #727272;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #a7a7a7;
+  }
+  
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}
+
+
+// Message d'erreur de validation
+.validation-error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 1.4;
+  
+  &::before {
+    content: "⚠️ ";
+    margin-right: 5px;
+  }
 }

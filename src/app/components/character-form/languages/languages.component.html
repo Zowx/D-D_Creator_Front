@@ -1,27 +1,52 @@
 <div class="form-languages main-container">
-  <h1>Languages</h1>
-  <p>Choisissez les languages que votre personnage peut parler.</p>
-  <div class="languages" [formGroup]="formLanguagesGroup">
-    <label
-      class="card-languages"
-      *ngFor="let language of languageList"
-      style="background-color: aqua; width: 100px; height: 100px"
-    >
-      <input
-        type="checkbox"
-        [value]="language"
-        [checked]="chosenLanguage.includes(language)"
-        (change)="addLanguage($event, language)"
-        formControlName="selectedLanguage"
-        name="selectedLanguage"
-      />
-      {{ language }}
-    </label>
+  <h1>Langues</h1>
+  <p>Choisissez les langues que votre personnage peut parler (maximum {{ maxLanguages }}).</p>
+  
+  <div class="languages-selection" [formGroup]="formLanguagesGroup">
+    <div class="languages-grid">
+      <label 
+        class="language-item"
+        *ngFor="let language of languageList"
+        [class.selected]="isLanguageSelected(language)"
+      >
+        <input
+          type="checkbox"
+          [value]="language"
+          [checked]="isLanguageSelected(language)"
+          (change)="onLanguageChange($event, language)"
+        />
+        <span class="language-name">{{ language }}</span>
+      </label>
+    </div>
   </div>
-  <div>
-    <h3>Languages choisies :</h3>
-    <p *ngFor="let language of chosenLanguage">
-      {{ language }}
-    </p>
+
+  <!-- Section des langues sélectionnées avec détails -->
+  <div *ngIf="selectedLanguagesData.length > 0" class="selected-languages-details">
+    <h3>Langues sélectionnées ({{ chosenLanguages.length }}/{{ maxLanguages }})</h3>
+    
+    <div class="languages-info-grid">
+      <div 
+        class="info-item" 
+        *ngFor="let language of selectedLanguagesData"
+      >
+        <div class="language-header">
+          <strong>{{ language.name }}</strong>
+          <span class="language-type" [class.exotic]="language.exotic">
+            {{ language.exotic ? 'Exotique' : 'Commune' }}
+          </span>
+        </div>
+        <div class="language-description" *ngIf="language.description">
+          {{ language.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="chosenLanguages.length === 0" class="no-selection-message">
+    <p><em>Sélectionnez des langues pour voir leurs détails</em></p>
+  </div>
+  
+  <div class="selection-counter">
+    <p>{{ chosenLanguages.length }}/{{ maxLanguages }} langue(s) sélectionnée(s)</p>
   </div>
 </div>

@@ -2,11 +2,34 @@
   <h1>Backgrounds</h1>
   <p>Choisissez l'historique de votre personnage.</p>
     <div class="backgrounds" [formGroup]="formBackgroundsGroup">
-        <label class="card-backgrounds"
-        *ngFor="let background of backgroundsList;"
-        style="background-color: red; width: 100px; height: 100px;">
-        <input required="true" type="radio" [value]="background" formControlName="selectedBackground" name="selectedBackground" />
-        {{ background }}
-        </label>
+    <select formControlName="selectedHistorique" name="selectedHistorique">
+      <option value="" disabled selected>Sélectionnez un background</option>
+      <option *ngFor="let background of backgroundsList" [value]="background">{{ background }}</option>
+    </select>
+  </div>
+
+  <!-- Affichage des détails du background sélectionner -->
+  <div *ngIf="selectedBackgroundData" class="selected-background-details">
+    <h3>{{ selectedBackgroundData.name }}</h3>
+    
+    <div class="background-info-grid">
+      <div class="info-item" *ngIf="selectedBackgroundData.description && selectedBackgroundData.description !== '[No description provided]'">
+        <strong>Description</strong>
+        <span class="value">{{ selectedBackgroundData.description }}</span>
+      </div>
+
+      <div class="info-item" *ngIf="selectedBackgroundData.featureName">
+        <strong>{{ selectedBackgroundData.featureName }}</strong>
+        <span class="value">{{ selectedBackgroundData.featureDescription }}</span>
+      </div>
+        <div class="info-item" *ngIf="selectedBackgroundData.languagesChoice > 0">
+        <strong>Choix de langue</strong>
+        <span class="value">{{ selectedBackgroundData.languagesChoice }} langue(s) au choix</span>
+      </div>
     </div>
+  </div>
+
+  <div *ngIf="!selectedBackgroundData" class="no-selection-message">
+    <p><em>Sélectionnez un background pour voir ses détails</em></p>
+  </div>
 </div>
