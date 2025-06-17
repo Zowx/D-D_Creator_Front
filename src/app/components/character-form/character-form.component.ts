@@ -13,7 +13,7 @@ import { NgFor } from '@angular/common';
 import {ClassesComponent} from './classes/classes.component';
 import {RacesComponent} from './races/races.component'
 import {BackgroundsComponent} from './backgrounds/backgrounds.component';
-import {LanguesComponent} from './languages/languages.component';
+import {LanguagesComponent} from './languages/languages.component';
 import {AlignmentService} from '../../services/alignment/alignment.service';
 
 @Component({
@@ -28,7 +28,7 @@ import {AlignmentService} from '../../services/alignment/alignment.service';
     ClassesComponent,
     RacesComponent, 
     BackgroundsComponent,
-    LanguesComponent
+    LanguagesComponent
   ],
 })
 export class CharacterFormComponent implements OnInit {
@@ -36,7 +36,7 @@ export class CharacterFormComponent implements OnInit {
   protected formClasses!: FormGroup;
   protected formRaces!: FormGroup;
   protected formBackgrounds!: FormGroup;
-  protected formLangues!: FormGroup;
+  protected formLanguages!: FormGroup;
   protected formEquipement!: FormGroup;
   protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
@@ -71,9 +71,9 @@ export class CharacterFormComponent implements OnInit {
       formHistoriques: this.formBuilder.group({
         selectedHistorique: new FormControl(null)
       }),
-      formLangues: this.formBuilder.group({
-        selectedLangue: new FormControl(null),
-        langues: this.formBuilder.array([]) 
+      formLanguages: this.formBuilder.group({
+        selectedLanguage: new FormControl(null),
+        languages: this.formBuilder.array([]) 
       }),
       formEquipement: this.formBuilder.group({
         selectedArme: new FormControl(null),
@@ -126,8 +126,8 @@ export class CharacterFormComponent implements OnInit {
   get formHistoriquesGroup(): FormGroup {
     return this.formCharacter.get('formHistoriques') as FormGroup;
   }
-  get formLanguesGroup(): FormGroup {
-    return this.formCharacter.get('formLangues') as FormGroup;
+  get formLanguagesGroup(): FormGroup {
+    return this.formCharacter.get('formLanguages') as FormGroup;
   }
   get formEquipementGroup(): FormGroup {
     return this.formCharacter.get('formEquipement') as FormGroup;

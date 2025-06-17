@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { NgFor } from '@angular/common';
+import { LanguagesService } from '../../../services/languages/languages.service';
 @Component({
   selector: 'app-languages',
   imports: [
@@ -21,10 +22,11 @@ import { NgFor } from '@angular/common';
 })
 export class LanguagesComponent {
   @Input() formLanguagesGroup!: FormGroup;
-  languageList = [];
+  languageList: string[] = [];
   chosenLanguage: string[] = [];
   
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,
+  private languagesService: LanguagesService) { }
 
   initForm() : void {
     this.formLanguagesGroup = this.formBuilder.group({
@@ -33,8 +35,17 @@ export class LanguagesComponent {
   }
 
   loadLanguages() {
-    //TODO
+    this.languagesService.getLanguages().subscribe({  
+      next: (dataLanguages) => {
+        this.languageList = dataLanguages.map((language) => language.name);
+        console.log("les langages", this.languageList);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
+  
   get languages(): FormArray {  
     return this.formLanguagesGroup.get('formLanguages.languages') as FormArray;
   }
