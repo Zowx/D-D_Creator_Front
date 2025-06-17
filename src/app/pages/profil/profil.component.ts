@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.scss'],
 })
 export class ProfileComponent {
   // Logic for the Profile page can be added here
