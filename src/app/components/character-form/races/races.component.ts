@@ -10,7 +10,6 @@ import {
 import { CommonModule } from '@angular/common'; 
 import { NgFor } from '@angular/common';
 import {RacesService} from '../../../services/races/races.service';
-import { race } from 'rxjs';
 @Component({
   selector: 'app-races',
   imports: [
@@ -23,7 +22,6 @@ import { race } from 'rxjs';
 })
 export class RacesComponent {
   @Input() formRacesGroup!: FormGroup;
-  //raceList = ['humain', 'elfe', 'nain', 'halfelin', 'dragonborn', 'tieffelin'];
   raceList: string[] = [];
   constructor(
     private readonly formBuilder: FormBuilder,

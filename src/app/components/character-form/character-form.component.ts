@@ -12,8 +12,8 @@ import {
 import { NgFor } from '@angular/common';
 import {ClassesComponent} from './classes/classes.component';
 import {RacesComponent} from './races/races.component'
-import {HistoriquesComponent} from './historiques/historiques.component';
-import {LanguesComponent} from './langues/langues.component';
+import {BackgroundsComponent} from './backgrounds/backgrounds.component';
+import {LanguagesComponent} from './languages/languages.component';
 import {AlignmentService} from '../../services/alignment/alignment.service';
 
 @Component({
@@ -21,14 +21,22 @@ import {AlignmentService} from '../../services/alignment/alignment.service';
   templateUrl: './character-form.component.html',
   styleUrls: ['./character-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgFor, ClassesComponent, RacesComponent, HistoriquesComponent, LanguesComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgFor,
+    ClassesComponent,
+    RacesComponent, 
+    BackgroundsComponent,
+    LanguagesComponent
+  ],
 })
 export class CharacterFormComponent implements OnInit {
   protected formCharacter!: FormGroup;
   protected formClasses!: FormGroup;
   protected formRaces!: FormGroup;
-  protected formHistoriques!: FormGroup;
-  protected formLangues!: FormGroup;
+  protected formBackgrounds!: FormGroup;
+  protected formLanguages!: FormGroup;
   protected formEquipement!: FormGroup;
   protected formDetail!: FormGroup;
   sexeOptions = ['Homme', 'Femme', 'Autre'];
@@ -63,9 +71,9 @@ export class CharacterFormComponent implements OnInit {
       formHistoriques: this.formBuilder.group({
         selectedHistorique: new FormControl(null)
       }),
-      formLangues: this.formBuilder.group({
-        selectedLangue: new FormControl(null),
-        langues: this.formBuilder.array([]) 
+      formLanguages: this.formBuilder.group({
+        selectedLanguage: new FormControl(null),
+        languages: this.formBuilder.array([]) 
       }),
       formEquipement: this.formBuilder.group({
         selectedArme: new FormControl(null),
@@ -118,8 +126,8 @@ export class CharacterFormComponent implements OnInit {
   get formHistoriquesGroup(): FormGroup {
     return this.formCharacter.get('formHistoriques') as FormGroup;
   }
-  get formLanguesGroup(): FormGroup {
-    return this.formCharacter.get('formLangues') as FormGroup;
+  get formLanguagesGroup(): FormGroup {
+    return this.formCharacter.get('formLanguages') as FormGroup;
   }
   get formEquipementGroup(): FormGroup {
     return this.formCharacter.get('formEquipement') as FormGroup;

@@ -1,0 +1,12 @@
+<div class="form-backgrounds main-container">
+  <h1>Backgrounds</h1>
+  <p>Choisissez l'historique de votre personnage.</p>
+    <div class="backgrounds" [formGroup]="formBackgroundsGroup">
+        <label class="card-backgrounds"
+        *ngFor="let background of backgroundsList;"
+        style="background-color: red; width: 100px; height: 100px;">
+        <input required="true" type="radio" [value]="background" formControlName="selectedBackground" name="selectedBackground" />
+        {{ background }}
+        </label>
+    </div>
+</div>

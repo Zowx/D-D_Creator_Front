@@ -10,23 +10,23 @@ export class BackgroundService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getRaces() {
-    return this.http.get<Background>(this.apiUrl + this.name);
+  getAllBackgrounds() {
+    return this.http.get<Background[]>(this.apiUrl + this.name);
   }
 
-  getRaceById(id: string) {
+  getBackgroundById(id: string) {
     return this.http.get<Background>(this.apiUrl + this.name + '/:' + id);
   }
 
-  addRace(background: Background) {// todo change to dto
-    return this.http.post<Background>(this.apiUrl + this.name, background);
+  addBackground(background: Background) {// todo change to dto
+    return this.http.post<any>(this.apiUrl + this.name, background);
   }
 
-  updateRace(id: string, background: Background) { // todo change to dto
-    return this.http.patch<Background>(this.apiUrl + this.name + '/:' + id, background);
+  updateBackground(id: string, background: Background) { // todo change to dto
+    return this.http.patch<any>(this.apiUrl + this.name + '/:' + id, background);
   }
     
-  deleteRace(id: string) {
-    return this.http.delete<Background>(this.apiUrl + this.name + '/:' + id);
+  deleteBackground(id: string) {
+    return this.http.delete<any>(this.apiUrl + this.name + '/:' + id);
   }
 }
