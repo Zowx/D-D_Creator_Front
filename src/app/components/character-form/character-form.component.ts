@@ -41,7 +41,8 @@ export class CharacterFormComponent implements OnInit {
   @ViewChild('racesComponent') racesComponent!: RacesComponent;
   @ViewChild('backgroundsComponent') backgroundsComponent!: BackgroundsComponent;
   @ViewChild('languagesComponent') languagesComponent!: LanguagesComponent;
-    protected formCharacter!: FormGroup;
+  @ViewChild('characteristicComponent') characteristicComponent!: CharacteristicComponent;
+  protected formCharacter!: FormGroup;
   protected formClasses!: FormGroup;
   protected formRaces!: FormGroup;
   protected formBackgrounds!: FormGroup;
@@ -113,7 +114,7 @@ export class CharacterFormComponent implements OnInit {
 
   initForm(): void {
     this.formCharacter = this.formBuilder.group({
-      selectedCharacter: new FormControl(null), // Ajout du contrôle manquant
+      selectedCharacter: new FormControl(null),
       formClasses: this.formBuilder.group({
         selectedClasse: new FormControl(null, Validators.required),
         selectedSubClass: new FormControl(null)
@@ -130,18 +131,16 @@ export class CharacterFormComponent implements OnInit {
         languages: this.formBuilder.array([]) 
       }),
       formCaracteristic: this.formBuilder.group({
-        force: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-        dexterite: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-        constitution: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-        intelligence: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-        sagesse: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-        charisme: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
-      }),
-      formEquipement: this.formBuilder.group({
+        force: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        dexterite: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        constitution: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        intelligence: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        sagesse: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        charisme: new FormControl(8, [Validators.min(8), Validators.max(15)]),
+      }),      formEquipement: this.formBuilder.group({
         selectedArme: new FormControl(null),
         selectedArmure: new FormControl(null),
-        equipements: this.formBuilder.array([]), 
-        languages: this.formBuilder.array([], this.exactTwoLanguagesValidator) 
+        equipements: this.formBuilder.array([])
       }),
       detailCharacter: this.formBuilder.group({
         nom: ["", Validators.required],
@@ -246,17 +245,14 @@ export class CharacterFormComponent implements OnInit {
   }
   get formLanguagesGroup(): FormGroup {
     return this.formCharacter.get('formLanguages') as FormGroup;
-  }  get detailCharacter(): FormGroup {
-    return this.formCharacter.get('detailCharacter') as FormGroup;
+  }  
+  get detailCharacter(): FormGroup {
+    return this.formCharacter.get('formDetail') as FormGroup;
   }
   get formCharacterGroup(): FormGroup {
     return this.formCharacter as FormGroup;
-  }
-  get formCharacteristicGroup(): FormGroup {
-    return this.formCharacter.get('formCharacteristicGroup') as FormGroup;
-  }
-  get formEquipementGroup(): FormGroup {
-    return this.formCharacter.get('formEquipement') as FormGroup;
+  }  get formCharacteristicGroup(): FormGroup {
+    return this.formCharacter.get('formCaracteristic') as FormGroup;
   }
   
   private showValidationErrors(): void {
@@ -315,12 +311,45 @@ export class CharacterFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    this.validationErrorMessage = '';
+  // Méthode de débogage pour identifier les erreurs de validation
+  private getFormValidationErrors(): any[] {
+    const formErrors: any[] = [];
+
+    Object.keys(this.formCharacter.controls).forEach(key => {
+      const controlErrors = this.formCharacter.get(key)?.errors;
+      if (controlErrors) {
+        formErrors.push({
+          control: key,
+          errors: controlErrors
+        });
+      }
+
+      // Vérifier les sous-groupes
+      const control = this.formCharacter.get(key);
+      if (control instanceof FormGroup) {
+        Object.keys(control.controls).forEach(subKey => {
+          const subControlErrors = control.get(subKey)?.errors;
+          if (subControlErrors) {
+            formErrors.push({
+              control: `${key}.${subKey}`,
+              errors: subControlErrors
+            });
+          }
+        });
+      }
+    });
+
+    return formErrors;
+  }
+
+  onSubmit(): void {    this.validationErrorMessage = '';
       // Vérification de la validité du formulaire
+      console.log("formCharacter", this.formCharacter);
     if (!this.formCharacter.valid) {
+      console.log('Form is invalid. Errors:', this.getFormValidationErrors());
       this.markFormGroupTouched(this.formCharacter);
       this.showValidationErrors();
+      console.log("probleme");
       return;
     }
 
@@ -375,6 +404,14 @@ export class CharacterFormComponent implements OnInit {
         defauts: this.formCharacter.get('detailCharacter.defauts')?.value,
         allies: this.formCharacter.get('detailCharacter.allies')?.value,
         capacites: this.formCharacter.get('detailCharacter.capacites')?.value
+      },
+      Caractéristiques: {
+        force: this.formCharacteristicGroup.get('force')?.value,
+        dexterite: this.formCharacteristicGroup.get('dexterite')?.value,
+        constitution: this.formCharacteristicGroup.get('constitution')?.value,
+        intelligence: this.formCharacteristicGroup.get('intelligence')?.value,
+        sagesse: this.formCharacteristicGroup.get('sagesse')?.value,
+        charisme: this.formCharacteristicGroup.get('charisme')?.value
       }
     };
 
@@ -425,6 +462,17 @@ export class CharacterFormComponent implements OnInit {
       {
         section: 'Détails du personnage',
         selection: formData.detailCharacter
+      },
+      {
+        section : 'Caractéristiques',
+        selection: {
+          force: this.formCharacteristicGroup.get('force')?.value,
+          dexterite: this.formCharacteristicGroup.get('dexterite')?.value,
+          constitution: this.formCharacteristicGroup.get('constitution')?.value,
+          intelligence: this.formCharacteristicGroup.get('intelligence')?.value,
+          sagesse: this.formCharacteristicGroup.get('sagesse')?.value,
+          charisme: this.formCharacteristicGroup.get('charisme')?.value
+        },
       }
     ];
 
