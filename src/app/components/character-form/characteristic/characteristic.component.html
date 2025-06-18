@@ -9,12 +9,7 @@
     <span class="char-value">{{ char.value }}</span>
     <button (click)="increase(char)" [disabled]="!canIncrease(char)">+</button>
 
-    <input
-      type="number"
-      [(ngModel)]="char.racialBonus"
-      min="0"
-      class="racial-input"
-    />
+    <input type="number" [(ngModel)]="char.racialBonus" min="0" class="racial-input"/>
 
     <span class="final-value">
       {{ char.value + (char.racialBonus ?? 0) }}

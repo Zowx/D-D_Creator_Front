@@ -6,10 +6,8 @@ import {
   ReactiveFormsModule,
   FormsModule
 } from '@angular/forms';
-import { Trait } from '../../../models/traits.model';
-import { TraitsService } from '../../../services/traits/traits.service';
-import { Race } from '../../../models/race.model';
-import { RacesService } from '../../../services/races/races.service';
+import { Ability } from '../../../models/ability.model';
+import { AbilitiesService } from '../../../services/abilities/abilities.service';
 
 interface Characteristic {
   name: string;
@@ -28,59 +26,40 @@ interface Characteristic {
 })
 export class CharacteristicComponent implements OnInit {
   @Input() formCharacteristicsGroup!: FormGroup;
-  @Input() selectedRace?: string;
   readonly MIN_VALUE = 8;
   readonly MAX_VALUE = 15;
   readonly TOTAL_POINTS = 27;
 
   characteristics: Characteristic[] = [];
-  raceBonuses: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private traitsService: TraitsService,
-    private racesService: RacesService
+    private abilitiesService: AbilitiesService
   ) {}
 
   ngOnInit(): void {
-    this.loadTraits();
-    if (this.selectedRace) {
-      this.loadRaceBonuses(this.selectedRace);
+    if (!this.formCharacteristicsGroup) {
+      this.formCharacteristicsGroup = this.formBuilder.group({
+        abilities: [[]],
+      });
     }
+    this.loadAbilities();
   }
 
-  ngOnChanges(): void {
-    if (this.selectedRace) {
-      this.loadRaceBonuses(this.selectedRace);
-    }
-  }
-
-  loadTraits(): void {
-    this.traitsService.getTraitsByName('Ability Score Increase').subscribe({
-      next: (dataTraits) => {
-        this.characteristics = dataTraits.map((trait) => ({
-          name: trait.name,
-          description: trait.description,
-          shortDescription: trait.shortDescription,
-          value: this.MIN_VALUE, // valeur initiale par défaut
+  loadAbilities(): void {
+    this.abilitiesService.getAbilities().subscribe({
+      next: (abilities: Ability[]) => {
+        this.characteristics = abilities.map((ability) => ({
+          name: ability.name,
+          description: ability.description,
+          shortDescription: ability.short_desc,
+          value: this.MIN_VALUE,
           racialBonus: 0
         }));
       },
-      error: (err) => {
-        console.error('Error loading traits:', err);
+      error: (err: any) => {
+        console.error('Error loading abilities:', err);
       },
-    });
-  }
-
-  loadRaceBonuses(raceName: string): void {
-    this.racesService.getRaces().subscribe({
-      next: (races: Race[]) => {
-        const race = races.find(r => r.name === raceName);
-      },
-      error: (err) => {
-        console.error('Error loading race info:', err);
-        this.raceBonuses = '';
-      }
     });
   }
 

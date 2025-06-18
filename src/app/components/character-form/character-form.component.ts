@@ -148,6 +148,5 @@ export class CharacterFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Personnage sauvegardé');
-    alert('Personnage sauvegardé avec succès !');
   }
 }
