@@ -194,6 +194,8 @@ export class CharacterFormComponent implements OnInit {
     this.selectedCharacter = this.characterListe.filter(a => a.id == this.formCharacterGroup.get('selectedCharacter')?.value)?.[0];
     if (!this.selectedCharacter) return;
 
+    this.languagesComponent?.setLanguagesData(this.selectedCharacter.languages || []);
+
     // Mettre à jour le formulaire avec les données du personnage sélectionné
     this.formCharacter.patchValue({
       formClasses: {

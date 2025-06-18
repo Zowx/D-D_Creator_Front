@@ -1,20 +1,13 @@
 <div class="form-languages main-container">
   <h1>Langues</h1>
   <p>Choisissez les langues que votre personnage peut parler (maximum {{ maxLanguages }}).</p>
-  
+
   <div class="languages-selection" [formGroup]="formLanguagesGroup">
     <div class="languages-grid">
-      <label 
-        class="language-item"
-        *ngFor="let language of languageList"
-        [class.selected]="isLanguageSelected(language)"
-      >
-        <input
-          type="checkbox"
-          [value]="language"
-          [checked]="isLanguageSelected(language)"
-          (change)="onLanguageChange($event, language)"
-        />
+      <label class="language-item" *ngFor="let language of languageList"
+        [class.selected]="isLanguageSelected(language)">
+        <input #languageCheckbox type="checkbox" [value]="language" [checked]="isLanguageSelected(language)"
+          (change)="onLanguageChange($event, language)" />
         <span class="language-name">{{ language }}</span>
       </label>
     </div>
@@ -23,12 +16,9 @@
   <!-- Section des langues sélectionnées avec détails -->
   <div *ngIf="selectedLanguagesData.length > 0" class="selected-languages-details">
     <h3>Langues sélectionnées ({{ chosenLanguages.length }}/{{ maxLanguages }})</h3>
-    
+
     <div class="languages-info-grid">
-      <div 
-        class="info-item" 
-        *ngFor="let language of selectedLanguagesData"
-      >
+      <div class="info-item" *ngFor="let language of selectedLanguagesData">
         <div class="language-header">
           <strong>{{ language.name }}</strong>
           <span class="language-type" [class.exotic]="language.exotic">
@@ -45,7 +35,7 @@
   <div *ngIf="chosenLanguages.length === 0" class="no-selection-message">
     <p><em>Sélectionnez des langues pour voir leurs détails</em></p>
   </div>
-  
+
   <div class="selection-counter">
     <p>{{ chosenLanguages.length }}/{{ maxLanguages }} langue(s) sélectionnée(s)</p>
   </div>

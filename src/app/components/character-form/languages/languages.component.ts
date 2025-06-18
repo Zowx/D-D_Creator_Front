@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Language } from './../../../models/language.model';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,7 +10,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { LanguagesService } from '../../../services/languages/languages.service';
-import { Language } from '../../../models/language.model';
 
 @Component({
   selector: 'app-languages',
@@ -22,13 +22,13 @@ import { Language } from '../../../models/language.model';
 })
 export class LanguagesComponent implements OnInit {
   @Input() formLanguagesGroup!: FormGroup;
+  @ViewChildren('languageCheckbox') languageCheckboxes!: QueryList<ElementRef<HTMLInputElement>>;
   languageList: string[] = [];
   languagesData: Language[] = [];
   chosenLanguages: string[] = [];
   selectedLanguagesData: Language[] = [];
   maxLanguages: number = 2;
   constructor(
-    private readonly formBuilder: FormBuilder,
     private readonly languagesService: LanguagesService
   ) {}
 
@@ -46,7 +46,13 @@ export class LanguagesComponent implements OnInit {
 
   onLanguageChange(event: any, languageName: string) {
     const isChecked = event.target.checked;
-
+    const languageId = this.languagesData.find(
+      (language) => language.name === languageName
+    )?.id.toString();
+    if (!languageId) {
+      console.error(`Langue non trouvée: ${languageName}`);
+      return;
+    }
     if (isChecked) {
       if (this.chosenLanguages.length >= this.maxLanguages) {
         event.target.checked = false;
@@ -55,10 +61,10 @@ export class LanguagesComponent implements OnInit {
         );
         return;
       }
-      this.chosenLanguages.push(languageName);
+      this.chosenLanguages.push(languageId);
     } else {
       this.chosenLanguages = this.chosenLanguages.filter(
-        (l) => l !== languageName
+        (l) => l !== languageId
       );
     }
 
@@ -67,9 +73,22 @@ export class LanguagesComponent implements OnInit {
     this.updateFormControl();
   }
 
+  public setLanguagesData(languages: string[]) {
+  this.chosenLanguages = languages;
+  this.updateSelectedLanguagesData();
+  this.updateFormControl();
+
+  setTimeout(() => {
+    this.languageCheckboxes.forEach((checkboxRef) => {
+      const input = checkboxRef.nativeElement;
+      input.checked = this.selectedLanguagesData.some(lang => lang.name === input.value);
+    });
+  });
+}
+
   updateSelectedLanguagesData() {
     this.selectedLanguagesData = this.languagesData.filter((language) =>
-      this.chosenLanguages.includes(language.name)
+      this.chosenLanguages.includes(language.id.toString())
     );
   }
 
