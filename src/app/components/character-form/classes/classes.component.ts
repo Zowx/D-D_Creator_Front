@@ -57,7 +57,7 @@ export class ClassesComponent implements OnInit {
   }
 
   loadAllAbilities() {
-    this.abilityService.getAbility().subscribe({
+    this.abilityService.getAbilities().subscribe({
       next: (abilities) => {
         this.allAbilities = abilities;
       },

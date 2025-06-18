@@ -15,7 +15,7 @@ export class AbilityService {
     return this.http.get<Ability[]>(this.apiUrl + this.name);
   }
   getAbilityById(id: string) {
-    return this.http.get<Ability>(this.apiUrl + this.name + '/' + id);
+    return this.http.get<Ability>(this.apiUrl + this.name + '/:' + id);
   }
 
   addAbility(abilities: Ability) {// todo change to dto

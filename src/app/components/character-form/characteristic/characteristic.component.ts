@@ -7,7 +7,7 @@ import {
   FormsModule
 } from '@angular/forms';
 import { Ability } from '../../../models/ability.model';
-import { AbilitiesService } from '../../../services/abilities/abilities.service';
+import { AbilityService } from '../../../services/ability/ability.service';
 
 interface Characteristic {
   name: string;
@@ -22,10 +22,10 @@ interface Characteristic {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './characteristic.component.html',
-  styleUrls: ['./characteristic.component.scss'],
+  styleUrls: ['./characteristic.component.scss', '../../../shared/shared-style.scss'],
 })
 export class CharacteristicComponent implements OnInit {
-  @Input() formCharacteristicsGroup!: FormGroup;
+  @Input() formCharacteristicGroup!: FormGroup;
   readonly MIN_VALUE = 8;
   readonly MAX_VALUE = 15;
   readonly TOTAL_POINTS = 27;
@@ -34,12 +34,12 @@ export class CharacteristicComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private abilitiesService: AbilitiesService
+    private abilityService: AbilityService
   ) {}
 
   ngOnInit(): void {
-    if (!this.formCharacteristicsGroup) {
-      this.formCharacteristicsGroup = this.formBuilder.group({
+    if (!this.formCharacteristicGroup) {
+      this.formCharacteristicGroup = this.formBuilder.group({
         abilities: [[]],
       });
     }
@@ -47,7 +47,7 @@ export class CharacteristicComponent implements OnInit {
   }
 
   loadAbilities(): void {
-    this.abilitiesService.getAbilities().subscribe({
+    this.abilityService.getAbilities().subscribe({
       next: (abilities: Ability[]) => {
         this.characteristics = abilities.map((ability) => ({
           name: ability.name,
@@ -87,15 +87,6 @@ export class CharacteristicComponent implements OnInit {
 
   decrease(char: Characteristic): void {
     if (char.value > this.MIN_VALUE) char.value--;
-  }
-
-  saveCharacteristics(): void {
-    const finalStats = this.characteristics.map(char => ({
-      name: char.name,
-      value: char.value + (char.racialBonus || 0),
-      modifier: this.modifier(char.value + (char.racialBonus || 0))
-    }));
-    console.log(finalStats);
   }
 
   trackByName(index: number, char: Characteristic) {

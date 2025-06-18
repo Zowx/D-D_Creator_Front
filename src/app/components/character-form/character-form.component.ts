@@ -86,7 +86,7 @@ export class CharacterFormComponent implements OnInit {
         selectedLanguage: new FormControl(null),
         languages: this.formBuilder.array([]) 
       }),
-      formCaracteristics: this.formBuilder.group({
+      formCaracteristic: this.formBuilder.group({
         force: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
         dexterite: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
         constitution: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
@@ -97,7 +97,7 @@ export class CharacterFormComponent implements OnInit {
       formEquipement: this.formBuilder.group({
         selectedArme: new FormControl(null),
         selectedArmure: new FormControl(null),
-        equipements: this.formBuilder.array([]) 
+        equipements: this.formBuilder.array([]), 
         languages: this.formBuilder.array([], this.exactTwoLanguagesValidator) 
       }),
       detailCharacter: this.formBuilder.group({
@@ -149,8 +149,8 @@ export class CharacterFormComponent implements OnInit {
   get formLanguagesGroup(): FormGroup {
     return this.formCharacter.get('formLanguages') as FormGroup;
   }
-  get characteristics(): FormGroup {
-    return this.formCharacter.get('formCaracteristics') as FormGroup;
+  get formCharacteristicGroup(): FormGroup {
+    return this.formCharacter.get('formCharacteristicGroup') as FormGroup;
   }
   get formEquipementGroup(): FormGroup {
     return this.formCharacter.get('formEquipement') as FormGroup;
