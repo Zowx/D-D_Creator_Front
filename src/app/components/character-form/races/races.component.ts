@@ -119,4 +119,14 @@ export class RacesComponent implements OnInit {
   onSubmit() {
     console.log('Form submitted!');
   }
+
+  public getRaces(id: string){
+    const race = this.mainRaces.find((c) => c.id == id);
+    if(race) {
+      return race.name;
+    } else {
+      return null;
+    }
+  }
+
 }

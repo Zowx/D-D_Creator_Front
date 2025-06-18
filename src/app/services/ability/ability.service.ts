@@ -18,12 +18,12 @@ export class AbilityService {
     return this.http.get<Ability>(this.apiUrl + this.name + '/:' + id);
   }
 
-  addAbility(abilities: Ability) {// todo change to dto
+  addAbility(abilities: Ability) {
     return this.http.post<Ability>(this.apiUrl + this.name, abilities);
   }
 
-  updateAbility(id: string, abilities: Ability) { // todo change to dto
-    return this.http.patch<Ability>(this.apiUrl + this.name + '/:' + id, abilities);
+  updateAbility(id: string, abilities: Ability) {
+    return this.http.patch<Ability>(this.apiUrl + this.name + '/' + id, abilities);
   }
     
   deleteAbility(id: string) {

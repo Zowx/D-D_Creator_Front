@@ -118,4 +118,14 @@ export class LanguagesComponent implements OnInit {
   onSubmit() {
     console.log('Form submitted!');
   }
+
+  public getLanguages(id: string[]) {
+    const language = id.map((langId) =>
+      this.languagesData.find((language) => language.id.toString() === langId)
+    );
+    if (language) {
+      return language;
+    }
+    return '';
+  }
 }

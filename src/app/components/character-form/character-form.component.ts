@@ -14,9 +14,11 @@ import { NgFor } from '@angular/common';
 import {ClassesComponent} from './classes/classes.component';
 import {RacesComponent} from './races/races.component'
 import {BackgroundsComponent} from './backgrounds/backgrounds.component';
-import { LanguagesComponent } from './languages/languages.component';
 import { CharacteristicComponent } from './characteristic/characteristic.component';
-import { AlignmentService } from '../../services/alignment/alignment.service';
+import {LanguagesComponent} from './languages/languages.component';
+import {AlignmentService} from '../../services/alignment/alignment.service';
+import {CharacterService} from '../../services/character/character.service';
+import {Character} from '../../models/character.model';
 
 @Component({
   selector: 'app-form',
@@ -39,8 +41,7 @@ export class CharacterFormComponent implements OnInit {
   @ViewChild('racesComponent') racesComponent!: RacesComponent;
   @ViewChild('backgroundsComponent') backgroundsComponent!: BackgroundsComponent;
   @ViewChild('languagesComponent') languagesComponent!: LanguagesComponent;
-  
-  protected formCharacter!: FormGroup;
+    protected formCharacter!: FormGroup;
   protected formClasses!: FormGroup;
   protected formRaces!: FormGroup;
   protected formBackgrounds!: FormGroup;
@@ -48,8 +49,11 @@ export class CharacterFormComponent implements OnInit {
   protected formCharacteristics!: FormGroup;
   protected formCaracteristics!: FormGroup;
   protected formEquipement!: FormGroup;
-  protected formDetail!: FormGroup;  sexeOptions = ['Homme', 'Femme', 'Autre'];
+  protected formDetail!: FormGroup;
   alignmentOptions: string[] = [];
+  characterListe: Character[] = [
+  ];
+  selectedCharacter: Character | null = null; 
   validationErrorMessage: string = '';
 
   // Validateur personnalisé pour s'assurer qu'exactement 2 langues sont sélectionnées
@@ -62,20 +66,59 @@ export class CharacterFormComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly alignmentService: AlignmentService
+    private readonly alignmentService: AlignmentService,
+    private readonly characterService: CharacterService
   ) {}
-
   ngOnInit(): void {
     this.initForm();
     this.loadAlignmentOptions();
+    this.getAllCharacters();
+    this.characterListe = [
+    {
+      id: "1",
+      raceId: "1",
+      classId: "5",
+      backgroundId: "1",
+      alignmentId: "1",
+      userId: 'user123',
+
+      xp: 1200,
+      level: 3,
+      name: 'Tharion',
+      player: 'Alice',
+      AC: 15,
+      speed: 30,
+      hp: 28,
+      maxHp: 28,
+      tempHp: 5,
+      personality: 'Brave and loyal',
+      ideals: 'Justice and honor',
+      bonds: 'Sworn to protect his homeland',
+      flaws: 'Reckless in battle',
+      age: 27,
+      height: '6ft',
+      weight: '180 lbs',
+      eyes: 'Green',
+      skin: 'Tan',
+      hair: 'Black',
+      appearance: 'Wears a worn leather armor with a family crest',
+      allies: 'Companions from the Silver Guard',
+      backstory: 'Former soldier turned adventurer after his village was attacked.',
+      treasure: 'An enchanted sword passed down from his father',
+      traits: 'Keen senses, fearless',
+      languages: ['1', '2']
+    }
+  ];
   }
 
   initForm(): void {
-    this.formCharacter = this.formBuilder.group({      
+    this.formCharacter = this.formBuilder.group({
+      selectedCharacter: new FormControl(null), // Ajout du contrôle manquant
       formClasses: this.formBuilder.group({
         selectedClasse: new FormControl(null, Validators.required),
         selectedSubClass: new FormControl(null)
-      }),      formRaces: this.formBuilder.group({
+      }),      
+      formRaces: this.formBuilder.group({
         selectedRace: new FormControl(null, Validators.required),
         selectedSubRace: new FormControl(null)
       }),      formHistoriques: this.formBuilder.group({
@@ -136,7 +179,62 @@ export class CharacterFormComponent implements OnInit {
     }
     });
   }
-  
+
+  getAllCharacters(): void {
+    this.characterService.getAllCharacter().subscribe({
+      next: (data) => {
+        this.characterListe = data.map(character => character as Character);
+      },
+      error: (err) => {
+        console.error('Error fetching characters:', err);
+      }
+    });
+  }
+
+  onCharacterSelected(): void {
+    this.selectedCharacter = this.characterListe.filter(a => a.id == this.formCharacterGroup.get('selectedCharacter')?.value)?.[0];
+    if (!this.selectedCharacter) return;
+
+    // Mettre à jour le formulaire avec les données du personnage sélectionné
+    this.formCharacter.patchValue({
+      formClasses: {
+        selectedClasse: this.classesComponent?.getClasses(this.selectedCharacter.classId),
+        selectedSubClass: null 
+      },
+      formRaces: {
+        selectedRace: this.racesComponent?.getRaces(this.selectedCharacter.raceId),
+        selectedSubRace: null
+      },
+      formHistoriques: {
+        selectedHistorique: this.backgroundsComponent?.getBackground(this.selectedCharacter.backgroundId),
+        selectedHistoriqueData: null 
+      },
+      formLanguages: {
+        selectedLanguage: this.languagesComponent?.getLanguages(this.selectedCharacter.languages),
+        languages: [] 
+      },
+      detailCharacter: {
+        nom: this.selectedCharacter.name,
+        alignment: this.selectedCharacter.alignmentId,
+        age: this.selectedCharacter.age || '',
+        taille: this.selectedCharacter.height || '',
+        poids: this.selectedCharacter.weight || '',
+        px: this.selectedCharacter.xp || '',
+        yeux: this.selectedCharacter.eyes || '',
+        peau: this.selectedCharacter.skin || '',
+        cheveux: this.selectedCharacter.hair || '',
+        apparence: this.selectedCharacter.appearance || '',
+        histoire: this.selectedCharacter.backstory || '',
+        traits: this.selectedCharacter.traits || '',
+        ideaux: this.selectedCharacter.ideals || '',
+        liens: this.selectedCharacter.bonds || '',
+        defauts: this.selectedCharacter.flaws || '',
+        allies: this.selectedCharacter.allies || '',
+        capacites: this.selectedCharacter.treasure || '',
+      }
+    });
+  }
+
   get formClassesGroup(): FormGroup {
     return this.formCharacter.get('formClasses') as FormGroup;
   }
@@ -148,6 +246,11 @@ export class CharacterFormComponent implements OnInit {
   }
   get formLanguagesGroup(): FormGroup {
     return this.formCharacter.get('formLanguages') as FormGroup;
+  }  get detailCharacter(): FormGroup {
+    return this.formCharacter.get('detailCharacter') as FormGroup;
+  }
+  get formCharacterGroup(): FormGroup {
+    return this.formCharacter as FormGroup;
   }
   get formCharacteristicGroup(): FormGroup {
     return this.formCharacter.get('formCharacteristicGroup') as FormGroup;
@@ -155,9 +258,6 @@ export class CharacterFormComponent implements OnInit {
   get formEquipementGroup(): FormGroup {
     return this.formCharacter.get('formEquipement') as FormGroup;
   }
-  get detailCharacter(): FormGroup {
-    return this.formCharacter.get('detail') as FormGroup;
-  } 
   
   private showValidationErrors(): void {
     const errors: string[] = [];

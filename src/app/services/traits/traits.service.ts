@@ -17,11 +17,11 @@ export class TraitsService {
     return this.http.get<Trait>(this.apiUrl + this.name + '/' + id);
   }
 
-  addTrait(trait: Trait) {//todo ajouter dto
+  addTrait(trait: Trait) {
     return this.http.post<Trait>(this.apiUrl + this.name, trait);
   }
 
-  updateTrait(id: string, trait: Trait) {//todo ajouter dto
+  updateTrait(id: string, trait: Trait) {
     return this.http.patch<Trait>(this.apiUrl + this.name + '/' + id, trait);
   }
   deleteTrait(id: string) {

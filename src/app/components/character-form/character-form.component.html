@@ -2,7 +2,15 @@
   class="form-character"
   [formGroup]="formCharacter"
   (ngSubmit)="onSubmit()"
->  <!-- ================== Classes ================== -->
+ > 
+ <div class="character" [formGroup]="formCharacter">
+    <select formControlName="selectedCharacter" name="selectedCharacter" (change)="onCharacterSelected()">
+      <option value="" disabled selected>Charger un personnage</option>
+      <option *ngFor="let character of characterListe" [value]="character.id">
+        {{ character.name }}
+      </option>
+    </select>  </div>
+  <!-- ================== Classes ================== -->
   <app-classes #classesComponent [formClassesGroup]="formClassesGroup"></app-classes> 
    <!-- ================= Races ================== -->
    <app-races #racesComponent [formRacesGroup]="formRacesGroup"></app-races>
@@ -30,12 +38,6 @@
         <div class="form-group">
           <h2>Sexe / Alignment / Âge réel</h2>
           <div class="form-row">
-            <select formControlName="sexe">
-              <option value="">Choisir un sexe</option>
-              <option *ngFor="let option of sexeOptions" [value]="option">
-                {{ option }}
-              </option>
-            </select>
             <select formControlName="alignment">
               <option value="">Choisir un alignment</option>
               <option *ngFor="let option of alignmentOptions" [value]="option">

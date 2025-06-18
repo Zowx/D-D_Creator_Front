@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   FormArray,
@@ -166,5 +165,14 @@ export class ClassesComponent implements OnInit {
 
   onSubmit() {
     console.log('Form submitted!');
+  }
+
+  public getClasses(id: string){
+    const classe = this.mainClasses.find((c) => c.id == id);
+    if (classe) {
+      return classe.name;
+    } else {
+      return null;
+    }
   }
 }

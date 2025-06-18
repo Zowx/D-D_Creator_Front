@@ -83,4 +83,13 @@ export class BackgroundsComponent implements OnInit {
   onSubmit() {
     console.log('Form submitted!');
   }
+
+    public getBackground(id: string){
+    const background = this.backgroundsData.find((c) => c.id == id);
+    if (background) {
+      return background.name;
+    } else {
+      return null;
+    }
+  }
 }

@@ -2,20 +2,17 @@ import { Race } from './race.model';
 import { Class } from './class.model';
 import { Background } from './background.model';
 import { Alignment } from './alignment.model';
-import { PlayerSkill } from './playerskill.model';
 import { CharacterAbility } from './characterability.model';
 import { CharacterLanguage } from './characterlanguage.model';
 
 export interface Character {
-  id: number;
-  race: Race;
-  raceId: number;
-  class: Class;
-  classId: number;
-  background: Background;
-  backgroundId: number;
-  alignment: Alignment;
-  alignmentId: number;
+  id: string;
+  raceId: string;
+  classId: string;
+  backgroundId: string;
+  alignmentId: string;
+  userId?: string;
+
   xp: number;
   level: number;
   name: string;
@@ -23,8 +20,8 @@ export interface Character {
   AC: number;
   speed: number;
   hp: number;
-  max_hp: number;
-  temp_hp: number;
+  maxHp: number;
+  tempHp: number;
   personality: string;
   ideals: string;
   bonds: string;
@@ -40,7 +37,12 @@ export interface Character {
   backstory: string;
   treasure: string;
   traits: string;
-  playerSkills: PlayerSkill[];
-  abilities: CharacterAbility[];
-  languages: CharacterLanguage[];
+
+  // race: Race;
+  // class: Class;
+  // background: Background;
+  // alignment: Alignment;
+
+  // abilities: CharacterAbility[];
+  languages: string[]; 
 }

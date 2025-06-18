@@ -18,11 +18,11 @@ export class BackgroundService {
     return this.http.get<Background>(this.apiUrl + this.name + '/' + id);
   }
 
-  addBackground(background: Background) {// todo change to dto
+  addBackground(background: Background) {
     return this.http.post<any>(this.apiUrl + this.name, background);
   }
 
-  updateBackground(id: string, background: Background) { // todo change to dto
+  updateBackground(id: string, background: Background) { 
     return this.http.patch<any>(this.apiUrl + this.name + '/' + id, background);
   }
     
