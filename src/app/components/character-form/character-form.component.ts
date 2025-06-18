@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -11,14 +11,14 @@ import {
   FormArray
 } from '@angular/forms';
 import { NgFor } from '@angular/common';
-import {ClassesComponent} from './classes/classes.component';
-import {RacesComponent} from './races/races.component'
-import {BackgroundsComponent} from './backgrounds/backgrounds.component';
+import { ClassesComponent } from './classes/classes.component';
+import { RacesComponent } from './races/races.component'
+import { BackgroundsComponent } from './backgrounds/backgrounds.component';
 import { CharacteristicComponent } from './characteristic/characteristic.component';
-import {LanguagesComponent} from './languages/languages.component';
-import {AlignmentService} from '../../services/alignment/alignment.service';
-import {CharacterService} from '../../services/character/character.service';
-import {Character} from '../../models/character.model';
+import { LanguagesComponent } from './languages/languages.component';
+import { AlignmentService } from '../../services/alignment/alignment.service';
+import { CharacterService } from '../../services/character/character.service';
+import { Character } from '../../models/character.model';
 
 @Component({
   selector: 'app-form',
@@ -30,14 +30,14 @@ import {Character} from '../../models/character.model';
     ReactiveFormsModule,
     NgFor,
     ClassesComponent,
-    RacesComponent, 
+    RacesComponent,
     BackgroundsComponent,
     LanguagesComponent,
     CharacteristicComponent
   ],
 })
-export class CharacterFormComponent implements OnInit { 
-  @ViewChild('classesComponent') classesComponent!: ClassesComponent;  
+export class CharacterFormComponent implements OnInit {
+  @ViewChild('classesComponent') classesComponent!: ClassesComponent;
   @ViewChild('racesComponent') racesComponent!: RacesComponent;
   @ViewChild('backgroundsComponent') backgroundsComponent!: BackgroundsComponent;
   @ViewChild('languagesComponent') languagesComponent!: LanguagesComponent;
@@ -54,7 +54,7 @@ export class CharacterFormComponent implements OnInit {
   alignmentOptions: string[] = [];
   characterListe: Character[] = [
   ];
-  selectedCharacter: Character | null = null; 
+  selectedCharacter: Character | null = null;
   validationErrorMessage: string = '';
 
   // Validateur personnalisé pour s'assurer qu'exactement 2 langues sont sélectionnées
@@ -69,47 +69,47 @@ export class CharacterFormComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly alignmentService: AlignmentService,
     private readonly characterService: CharacterService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.initForm();
     this.loadAlignmentOptions();
     this.getAllCharacters();
     this.characterListe = [
-    {
-      id: "1",
-      raceId: "1",
-      classId: "5",
-      backgroundId: "1",
-      alignmentId: "1",
-      userId: 'user123',
+      {
+        id: "1",
+        raceId: "1",
+        classId: "5",
+        backgroundId: "1",
+        alignmentId: "1",
+        userId: 'user123',
 
-      xp: 1200,
-      level: 3,
-      name: 'Tharion',
-      player: 'Alice',
-      AC: 15,
-      speed: 30,
-      hp: 28,
-      maxHp: 28,
-      tempHp: 5,
-      personality: 'Brave and loyal',
-      ideals: 'Justice and honor',
-      bonds: 'Sworn to protect his homeland',
-      flaws: 'Reckless in battle',
-      age: 27,
-      height: '6ft',
-      weight: '180 lbs',
-      eyes: 'Green',
-      skin: 'Tan',
-      hair: 'Black',
-      appearance: 'Wears a worn leather armor with a family crest',
-      allies: 'Companions from the Silver Guard',
-      backstory: 'Former soldier turned adventurer after his village was attacked.',
-      treasure: 'An enchanted sword passed down from his father',
-      traits: 'Keen senses, fearless',
-      languages: ['1', '2']
-    }
-  ];
+        xp: 1200,
+        level: 3,
+        name: 'Tharion',
+        player: 'Alice',
+        AC: 15,
+        speed: 30,
+        hp: 28,
+        maxHp: 28,
+        tempHp: 5,
+        personality: 'Brave and loyal',
+        ideals: 'Justice and honor',
+        bonds: 'Sworn to protect his homeland',
+        flaws: 'Reckless in battle',
+        age: 27,
+        height: '6ft',
+        weight: '180 lbs',
+        eyes: 'Green',
+        skin: 'Tan',
+        hair: 'Black',
+        appearance: 'Wears a worn leather armor with a family crest',
+        allies: 'Companions from the Silver Guard',
+        backstory: 'Former soldier turned adventurer after his village was attacked.',
+        treasure: 'An enchanted sword passed down from his father',
+        traits: 'Keen senses, fearless',
+        languages: ['1', '2']
+      }
+    ];
   }
 
   initForm(): void {
@@ -118,26 +118,26 @@ export class CharacterFormComponent implements OnInit {
       formClasses: this.formBuilder.group({
         selectedClasse: new FormControl(null, Validators.required),
         selectedSubClass: new FormControl(null)
-      }),      
+      }),
       formRaces: this.formBuilder.group({
         selectedRace: new FormControl(null, Validators.required),
         selectedSubRace: new FormControl(null)
-      }),      formHistoriques: this.formBuilder.group({
+      }), formHistoriques: this.formBuilder.group({
         selectedHistorique: new FormControl(null, Validators.required),
         selectedHistoriqueData: new FormControl(null)
       }),
       formLanguages: this.formBuilder.group({
         selectedLanguage: new FormControl(null),
-        languages: this.formBuilder.array([]) 
+        languages: this.formBuilder.array([])
       }),
       formCaracteristic: this.formBuilder.group({
-        force: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
-        dexterite: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
-        constitution: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
-        intelligence: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
-        sagesse: new FormControl(8, [ Validators.min(8), Validators.max(15)]),
+        force: new FormControl(8, [Validators.min(8), Validators.max(15)]),
+        dexterite: new FormControl(8, [Validators.min(8), Validators.max(15)]),
+        constitution: new FormControl(8, [Validators.min(8), Validators.max(15)]),
+        intelligence: new FormControl(8, [Validators.min(8), Validators.max(15)]),
+        sagesse: new FormControl(8, [Validators.min(8), Validators.max(15)]),
         charisme: new FormControl(8, [Validators.min(8), Validators.max(15)]),
-      }),      formEquipement: this.formBuilder.group({
+      }), formEquipement: this.formBuilder.group({
         selectedArme: new FormControl(null),
         selectedArmure: new FormControl(null),
         equipements: this.formBuilder.array([])
@@ -163,7 +163,7 @@ export class CharacterFormComponent implements OnInit {
         capacites: [""],
       }),
     });
-    
+
     // Creer formDetail comme reference au sous-groupe
     this.formDetail = this.formCharacter.get('detailCharacter') as FormGroup;
   }
@@ -175,7 +175,7 @@ export class CharacterFormComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching alignments:', err);
-    }
+      }
     });
   }
 
@@ -198,7 +198,7 @@ export class CharacterFormComponent implements OnInit {
     this.formCharacter.patchValue({
       formClasses: {
         selectedClasse: this.classesComponent?.getClasses(this.selectedCharacter.classId),
-        selectedSubClass: null 
+        selectedSubClass: null
       },
       formRaces: {
         selectedRace: this.racesComponent?.getRaces(this.selectedCharacter.raceId),
@@ -206,11 +206,11 @@ export class CharacterFormComponent implements OnInit {
       },
       formHistoriques: {
         selectedHistorique: this.backgroundsComponent?.getBackground(this.selectedCharacter.backgroundId),
-        selectedHistoriqueData: null 
+        selectedHistoriqueData: null
       },
       formLanguages: {
         selectedLanguage: this.languagesComponent?.getLanguages(this.selectedCharacter.languages),
-        languages: [] 
+        languages: []
       },
       detailCharacter: {
         nom: this.selectedCharacter.name,
@@ -238,51 +238,51 @@ export class CharacterFormComponent implements OnInit {
     return this.formCharacter.get('formClasses') as FormGroup;
   }
   get formRacesGroup(): FormGroup {
-    return this.formCharacter.get('formRaces') as FormGroup; 
+    return this.formCharacter.get('formRaces') as FormGroup;
   }
   get formHistoriquesGroup(): FormGroup {
     return this.formCharacter.get('formHistoriques') as FormGroup;
   }
   get formLanguagesGroup(): FormGroup {
     return this.formCharacter.get('formLanguages') as FormGroup;
-  }  
+  }
   get detailCharacter(): FormGroup {
     return this.formCharacter.get('formDetail') as FormGroup;
   }
   get formCharacterGroup(): FormGroup {
     return this.formCharacter as FormGroup;
-  }  get formCharacteristicGroup(): FormGroup {
+  } get formCharacteristicGroup(): FormGroup {
     return this.formCharacter.get('formCaracteristic') as FormGroup;
   }
-  
+
   private showValidationErrors(): void {
     const errors: string[] = [];
-    
+
     // Vérifier les champs obligatoires
     if (this.formCharacter.get('formClasses.selectedClasse')?.invalid) {
       errors.push('• Une classe doit être sélectionnée');
     }
-    
+
     if (this.formCharacter.get('formRaces.selectedRace')?.invalid) {
       errors.push('• Une race doit être sélectionnée');
     }
-    
+
     if (this.formCharacter.get('formHistoriques.selectedHistorique')?.invalid) {
       errors.push('• Un background doit être sélectionné');
     }
-    
+
     if (this.formCharacter.get('formLanguages.languages')?.invalid) {
       errors.push('• Exactement 2 langues doivent être sélectionnées');
     }
-    
+
     if (this.formCharacter.get('detailCharacter.nom')?.invalid) {
       errors.push('• Le nom du personnage est obligatoire');
     }
-    
+
     if (this.formCharacter.get('detailCharacter.alignment')?.invalid) {
       errors.push('• Un alignement doit être sélectionné');
     }
-    
+
     // Stocker le message d'erreur
     if (errors.length > 0) {
       this.validationErrorMessage = 'Veuillez corriger les erreurs suivantes : ' + errors.join(' ');
@@ -295,11 +295,11 @@ export class CharacterFormComponent implements OnInit {
     Object.keys(formGroup.controls).forEach(key => {
       const control = formGroup.get(key);
       control?.markAsTouched();
-      
+
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }
-      
+
       if (control instanceof FormArray) {
         control.controls.forEach((arrayControl) => {
           arrayControl.markAsTouched();
@@ -342,9 +342,10 @@ export class CharacterFormComponent implements OnInit {
     return formErrors;
   }
 
-  onSubmit(): void {    this.validationErrorMessage = '';
-      // Vérification de la validité du formulaire
-      console.log("formCharacter", this.formCharacter);
+  onSubmit(): void {
+    this.validationErrorMessage = '';
+    // Vérification de la validité du formulaire
+    console.log("formCharacter", this.formCharacter);
     if (!this.formCharacter.valid) {
       console.log('Form is invalid. Errors:', this.getFormValidationErrors());
       this.markFormGroupTouched(this.formCharacter);
@@ -357,11 +358,11 @@ export class CharacterFormComponent implements OnInit {
     const selectedSubClassData = this.classesComponent?.selectedSubClass || null;
     const selectedClassSavingThrows = this.classesComponent?.selectedClasseSavingThrows || [];
     const selectedRaceData = this.racesComponent?.selectedRaceData || null;
-    const selectedSubRaceData = this.racesComponent?.selectedSubRace || null; 
+    const selectedSubRaceData = this.racesComponent?.selectedSubRace || null;
     const selectedBackgroundData = this.backgroundsComponent?.selectedBackgroundData || null;
     const selectedLanguagesData = this.languagesComponent?.selectedLanguagesData || [];
-  
-    
+
+
     //Collecte toute les données du formulaire avec les objets complets
     const formData = {
       classes: {
@@ -369,17 +370,18 @@ export class CharacterFormComponent implements OnInit {
         selectedSubClass: this.formCharacter.get('formClasses.selectedSubClass')?.value,
         selectedClassData: selectedClassData,
         selectedSubClassData: selectedSubClassData,
-        selectedClassSavingThrows: selectedClassSavingThrows      },
+        selectedClassSavingThrows: selectedClassSavingThrows
+      },
       races: {
         selectedRace: this.formCharacter.get('formRaces.selectedRace')?.value,
         selectedSubRace: this.formCharacter.get('formRaces.selectedSubRace')?.value,
         selectedRaceData: selectedRaceData,
         selectedSubRaceData: selectedSubRaceData
-      },      
+      },
       backgrounds: {
         selectedHistorique: this.formCharacter.get('formHistoriques.selectedHistorique')?.value,
         selectedHistoriqueData: selectedBackgroundData
-      },      
+      },
       languages: {
         selectedLanguage: this.formCharacter.get('formLanguages.selectedLanguage')?.value,
         languages: this.formCharacter.get('formLanguages.languages')?.value || [],
@@ -422,19 +424,19 @@ export class CharacterFormComponent implements OnInit {
         selection: {
           selectedClasse: formData.classes.selectedClasse,
           selectedSubClass: formData.classes.selectedSubClass,
-          
+
         },
         completeData: {
           classeComplete: formData.classes.selectedClassData,
           subClasseComplete: formData.classes.selectedSubClassData,
           selectedClassSavingThrows: formData.classes.selectedClassSavingThrows
         }
-      },      {
+      }, {
         section: 'Races',
         selection: {
           selectedRace: formData.races.selectedRace,
           selectedSubRace: formData.races.selectedSubRace
-        },        
+        },
         completeData: {
           raceComplete: formData.races.selectedRaceData,
           subRaceComplete: formData.races.selectedSubRaceData
@@ -464,7 +466,7 @@ export class CharacterFormComponent implements OnInit {
         selection: formData.detailCharacter
       },
       {
-        section : 'Caractéristiques',
+        section: 'Caractéristiques',
         selection: {
           force: this.formCharacteristicGroup.get('force')?.value,
           dexterite: this.formCharacteristicGroup.get('dexterite')?.value,
@@ -476,6 +478,6 @@ export class CharacterFormComponent implements OnInit {
       }
     ];
 
-    console.log('Données du personnage:', characterDataArray); 
+    console.log('Données du personnage:', characterDataArray);
   }
 }
