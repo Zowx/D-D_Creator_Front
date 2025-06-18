@@ -1,0 +1,55 @@
+<div class="form-races main-container">
+  <h1>Races</h1>
+  <p>Choisissez la race de votre personnage.</p>
+
+  <div class="races" [formGroup]="formRacesGroup">
+    <select formControlName="selectedRace" name="selectedRace">
+      <option value="" disabled selected>Sélectionnez une race</option>
+      <option *ngFor="let race of raceList" [value]="race">{{ race }}</option>
+    </select>
+  </div>
+
+  <!-- Sélection de sous-race si disponible -->
+  <div
+    *ngIf="selectedSubRaces.length > 0"
+    class="sub-races"
+    [formGroup]="formRacesGroup"
+  >
+    <h4>Sous-races disponibles :</h4>
+    <select formControlName="selectedSubRace" name="selectedSubRace">
+      <option value="" disabled selected>
+        Sélectionnez une sous-race (optionnel)
+      </option>
+      <option *ngFor="let subRace of selectedSubRaces" [value]="subRace.name">
+        {{ subRace.name }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedRaceData" class="selected-race-details">
+    <h3>{{ selectedRaceData.name }}</h3>
+    <div class="race-info-grid">
+      <div class="info-item" *ngIf="selectedRaceData.description">
+        <strong>Description</strong>
+        <span class="value">{{ selectedRaceData.description }}</span>
+      </div>
+
+      <div class="info-item" *ngIf="selectedSubRaces.length > 0">
+        <strong>Nombre de sous-races</strong>
+        <span class="value">{{ selectedSubRaces.length }}</span>
+      </div>
+    </div>
+
+    
+    <div *ngIf="selectedSubRace" class="selected-subrace-details">
+      <h4>Sous-race sélectionnée : {{ selectedSubRace.name }}</h4>
+      <div class="subrace-info">
+        <p><strong>Description:</strong> {{ selectedSubRace.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!selectedRaceData" class="no-selection-message">
+    <p><em>Sélectionnez une race pour voir ses détails</em></p>
+  </div>
+</div>

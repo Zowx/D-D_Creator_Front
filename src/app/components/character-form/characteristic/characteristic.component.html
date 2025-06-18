@@ -1,0 +1,25 @@
+<div class="characteristics main-container">
+  @for (char of characteristics; track char.name) {
+  <div class="char-row">
+    <span class="char-name">{{ char.name }}</span>    <button type="button" (click)="decrease(char)" [disabled]="char.value <= MIN_VALUE">
+      -
+    </button>
+    <span class="char-value">{{ char.value }}</span>
+    <button type="button" (click)="increase(char)" [disabled]="!canIncrease(char)">+</button>
+
+    <span class="char-value"> Bonus de race</span>
+    <input type="number" [(ngModel)]="char.racialBonus" min="0" class="racial-input"/>
+
+    <span class="final-value">
+      {{ char.value + (char.racialBonus ?? 0) }}
+      ({{ modifier(char.value + (char.racialBonus ?? 0)) >= 0 ? "+" : ""
+      }}{{ modifier(char.value + (char.racialBonus ?? 0)) }})
+    </span>
+  </div>
+  }
+
+  <div class="points-summary">
+    Coût en points : {{ totalPointsUsed }} / {{ TOTAL_POINTS }}
+  </div>
+
+</div>

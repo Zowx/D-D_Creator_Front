@@ -1,0 +1,40 @@
+/* Styles pour le composant Characteristic */
+.characteristics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .char-row {
+      display: grid;
+      grid-template-columns: 100px auto auto auto 80px auto;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .racial-input {
+      width: 100px;
+    }
+    .points-summary {
+      font-weight: bold;
+    }
+  }
+
+  button{
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #a39797!important;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: #a7a7a7!important;
+    }
+    
+    &:disabled {
+      background-color: #b5aeae!important;
+      cursor: not-allowed;
+    }
+  }
+  

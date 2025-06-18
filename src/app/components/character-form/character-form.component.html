@@ -1,166 +1,121 @@
-<form class="character-form" (ngSubmit)="onSubmit()">
+<form
+  class="form-character"
+  [formGroup]="formCharacter"
+  (ngSubmit)="onSubmit()"
+ > 
+ <div class="character" [formGroup]="formCharacter">
+    <select formControlName="selectedCharacter" name="selectedCharacter" (change)="onCharacterSelected()">
+      <option value="" disabled selected>Charger un personnage</option>
+      <option *ngFor="let character of characterListe" [value]="character.id">
+        {{ character.name }}
+      </option>
+    </select>  </div>
+  <!-- ================== Classes ================== -->
+  <app-classes #classesComponent [formClassesGroup]="formClassesGroup"></app-classes> 
+   <!-- ================= Races ================== -->
+   <app-races #racesComponent [formRacesGroup]="formRacesGroup"></app-races>
+  <!-- ================== Backgrounds ================== -->
+  <app-backgrounds #backgroundsComponent [formBackgroundsGroup]="formHistoriquesGroup"></app-backgrounds>
+  <!-- ================== Langues ================== -->
+  <app-languages #languagesComponent [formLanguagesGroup]="formLanguagesGroup"></app-languages>
+  <!-- ================== Caractéristiques ================== -->
+  <app-characteristic #characteristicComponent [formCharacteristicGroup]="formCharacteristicGroup"></app-characteristic>
+  <!-- ================== Detail ================== -->
   <h1>Personnage</h1>
   <p>Définissez les derniers détails du personnage.</p>
-
-  <div class="form-grid">
-    <div class="left-column">
-      <div class="form-group">
-        <h2>Nom</h2>
-        <input
-          type="text"
-          [(ngModel)]="character.nom"
-          name="nom"
-          placeholder="Nom du personnage"
-        />
-      </div>
-
-      <div class="form-group">
-        <h2>Sexe / Alignement / Âge réel</h2>
-        <div class="form-row">
-          <select [(ngModel)]="character.sexe" name="sexe">
-            <option *ngFor="let option of sexeOptions" [value]="option">
-              {{ option }}
-            </option>
-          </select>
-          <select [(ngModel)]="character.alignement" name="alignement">
-            <option *ngFor="let option of alignementOptions" [value]="option">
-              {{ option }}
-            </option>
-          </select>
+  <div class="form-detail" [formGroup]="formDetail">
+    <div class="form-grid">
+      <div class="left-column">
+        <div class="form-group">
+          <h2>Nom</h2>
           <input
-            type="number"
-            [(ngModel)]="character.age"
-            name="age"
-            placeholder="Âge"
+            type="text"
+            formControlName="nom"
+            placeholder="Nom du personnage"
           />
+        </div>
+
+        <div class="form-group">
+          <h2>Sexe / Alignment / Âge réel</h2>
+          <div class="form-row">
+            <select formControlName="alignment">
+              <option value="">Choisir un alignment</option>
+              <option *ngFor="let option of alignmentOptions" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+            <input type="number" formControlName="age" placeholder="Âge" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h2>Taille / Poids / PX</h2>
+          <div class="form-row">
+            <input type="text" formControlName="taille" placeholder="1,75 m" />
+            <input type="text" formControlName="poids" placeholder="80 kg" />
+            <input type="number" formControlName="px" placeholder="0" />
+          </div>
+        </div>
+        <div class="form-group">
+          <h2>Yeux / Peau / Cheveux</h2>
+          <div class="form-row">
+            <input type="text" formControlName="yeux" placeholder="Yeux" />
+            <input type="text" formControlName="peau" placeholder="Peau" />
+            <input
+              type="text"
+              formControlName="cheveux"
+              placeholder="Cheveux"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h2>Apparence du personnage</h2>
+          <textarea rows="5" formControlName="apparence"></textarea>
+        </div>
+
+        <div class="form-group">
+          <h2>Histoire du personnage</h2>
+          <textarea rows="5" formControlName="histoire"></textarea>
         </div>
       </div>
 
-      <div class="form-group">
-        <h2>Taille / Poids / PX</h2>
-        <div class="form-row">
-          <input
-            type="text"
-            [(ngModel)]="character.taille"
-            name="taille"
-            placeholder="1,75 m"
-          />
-          <input
-            type="text"
-            [(ngModel)]="character.poids"
-            name="poids"
-            placeholder="80 kg"
-          />
-          <input
-            type="number"
-            [(ngModel)]="character.px"
-            name="px"
-            placeholder="0"
-          />
+      <div class="right-column">
+        <div class="form-group">
+          <h2>Traits de personnalité</h2>
+          <textarea rows="5" formControlName="traits"></textarea>
         </div>
-      </div>
 
-      <div class="form-group">
-        <h2>Yeux / Peau / Cheveux</h2>
-        <div class="form-row">
-          <input
-            type="text"
-            [(ngModel)]="character.yeux"
-            name="yeux"
-            placeholder="Yeux"
-          />
-          <input
-            type="text"
-            [(ngModel)]="character.peau"
-            name="peau"
-            placeholder="Peau"
-          />
-          <input
-            type="text"
-            [(ngModel)]="character.cheveux"
-            name="cheveux"
-            placeholder="Cheveux"
-          />
+        <div class="form-group">
+          <h2>Idéaux</h2>
+          <textarea rows="5" formControlName="ideaux"></textarea>
         </div>
-      </div>
 
-      <div class="form-group">
-        <h2>Apparence du personnage</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.apparence"
-          name="apparence"
-        ></textarea>
-      </div>
+        <div class="form-group">
+          <h2>Liens</h2>
+          <textarea rows="5" formControlName="liens"></textarea>
+        </div>
 
-      <div class="form-group">
-        <h2>Histoire du personnage</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.histoire"
-          name="histoire"
-        ></textarea>
-      </div>
-    </div>
+        <div class="form-group">
+          <h2>Défauts</h2>
+          <textarea rows="5" formControlName="defauts"></textarea>
+        </div>
 
-    <div class="right-column">
-      <div class="form-group">
-        <h2>Traits de personnalité</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.traits"
-          name="traits"
-        ></textarea>
-      </div>
+        <div class="form-group">
+          <h2>Alliés et Organisations</h2>
+          <textarea rows="5" formControlName="allies"></textarea>
+        </div>
 
-      <div class="form-group">
-        <h2>Idéaux</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.ideaux"
-          name="ideaux"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <h2>Liens</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.liens"
-          name="liens"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <h2>Défauts</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.defauts"
-          name="defauts"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <h2>Alliés et Organisations</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.allies"
-          name="allies"
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <h2>Capacités supplémentaires</h2>
-        <textarea
-          rows="5"
-          [(ngModel)]="character.capacites"
-          name="capacites"
-        ></textarea>
+        <div class="form-group">
+          <h2>Capacités supplémentaires</h2>
+          <textarea rows="5" formControlName="capacites"></textarea>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="form-actions">
-    <button type="submit">Sauvegarder</button>
-  </div>
+   <div *ngIf="validationErrorMessage" class="validation-error-message">
+      {{ validationErrorMessage }}
+    </div>
+    <button class="btn-save" type="submit" >Sauvegarder</button>
 </form>

@@ -16,10 +16,12 @@
     "pnpm": ">=8.0.0"
   },
   "dependencies": {
+    "@angular/cdk": "^19.2.18",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
     "@angular/forms": "^19.2.0",
+    "@angular/material": "^19.2.18",
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/platform-server": "^19.2.0",
@@ -45,5 +47,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "rimraf": "6.0.1",
     "typescript": "~5.7.2"
-  }
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }
