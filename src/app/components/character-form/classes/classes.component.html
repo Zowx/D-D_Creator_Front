@@ -1,46 +1,72 @@
-<div
-    class="form-classes main-container"
-  >
-    <h1>Classes</h1>
-    <p>Choisissez la classes de votre personnage.</p>    <div class="classes" [formGroup]="formClassesGroup">
+<div class="form-classes main-container">
+  <h1>Classes</h1>
+  <p>Choisissez la classes de votre personnage.</p>
+  <div class="classes" [formGroup]="formClassesGroup">
     <select formControlName="selectedClasse" name="selectedClasse">
       <option value="" disabled selected>Sélectionnez une classe</option>
-      <option *ngFor="let classe of classList" [value]="classe">{{ classe }}</option>
+      <option *ngFor="let classe of classList" [value]="classe">
+        {{ classe }}
+      </option>
     </select>
-    </div>
-    <div *ngIf="selectedClasseData" class="selected-classe-details">
-      <h3>{{ selectedClasseData.name }}</h3>
-      
-      <div class="classe-info-grid">
-        <div class="info-item" *ngIf="selectedClasseData.caster_type">
-          <strong>Type de lanceur</strong>
-          <span class="value">{{ selectedClasseData.caster_type }}</span>
-        </div>
-        
-        <div class="info-item" *ngIf="selectedClasseData.hit_dice">
-          <strong>Dé de vie</strong>
-          <span class="value">{{ selectedClasseData.hit_dice }}</span>
-        </div>
-        
-        <div class="info-item" *ngIf="selectedClasseData.subclass">
-          <strong>Sous-classe</strong>
-          <span class="value">{{ selectedClasseData.subclass }}</span>
-        </div>
-        
-        <div class="info-item" *ngIf="selectedClasseData.savingThrows && selectedClasseData.savingThrows.length > 0">
-          <strong>Jets de sauvegarde</strong>
-          <div class="saving-throws-container">
-            <span 
-              *ngFor="let savingThrow of selectedClasseData.savingThrows" 
-              class="saving-throw-badge"
-            >
-              {{ savingThrow.name}}
-            </span>
-          </div>
+  </div>
+
+  <!-- Selection de sous-classe si disponible -->
+  <div
+    *ngIf="selectedSubClasses.length > 0"
+    class="sub-classes"
+    [formGroup]="formClassesGroup"
+  >
+    <h4>Sous-classes disponibles :</h4>
+    <select formControlName="selectedSubClass" name="selectedSubClass">
+      <option value="" disabled selected>
+        Sélectionnez une sous-classe (optionnel)
+      </option>
+      <option
+        *ngFor="let subClass of selectedSubClasses"
+        [value]="subClass.name"
+      >
+        {{ subClass.name }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="selectedClasseData" class="selected-classe-details">
+    <h3>{{ selectedClasseData.name }}</h3>
+
+    <div class="classe-info-grid">
+      <div class="info-item" *ngIf="selectedClasseData.caster_type">
+        <strong>Type de lanceur</strong>
+        <span class="value">{{ selectedClasseData.caster_type }}</span>
+      </div>
+      <div class="info-item" *ngIf="selectedClasseData.hitDice">
+        <strong>Dé de vie</strong>
+        <span class="value">{{ selectedClasseData.hitDice }}</span>
+      </div>
+
+      <div
+        class="info-item"
+        *ngIf="
+          selectedClasseSavingThrows && selectedClasseSavingThrows.length > 0
+        "
+      >
+        <strong>Jets de sauvegarde</strong>
+        <div class="saving-throws-container">
+          <span
+            *ngFor="let savingThrow of selectedClasseSavingThrows"
+            class="saving-throw-badge"
+          >
+            {{ savingThrow.name }}
+          </span>
         </div>
       </div>
+
+      <div class="info-item" *ngIf="selectedSubClasses.length > 0">
+        <strong>Nombre de sous-classes</strong>
+        <span class="value">{{ selectedSubClasses.length }}</span>
+      </div>
     </div>
-    
-    <div *ngIf="!selectedClasseData" class="no-selection-message">
-      <p><em>Sélectionnez une classe pour voir ses détails</em></p>
-    </div></div>
+  </div>
+
+  <div *ngIf="!selectedClasseData" class="no-selection-message">
+    <p><em>Sélectionnez une classe pour voir ses détails</em></p>
+  </div>
+</div>
