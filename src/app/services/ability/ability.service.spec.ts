@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { AbilityService } from './ability.service';
 import { Ability } from '../../models/ability.model';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../testing/environment-mock';
 
 const apiUrl = environment.apiUrl + '/abilities';
 
@@ -106,7 +106,7 @@ describe('AbilityService', () => {
       service.updateAbility('1', mockAbility).subscribe((ability) => {
         expect(ability).toEqual(mockAbility);
       });
-      const req = httpMock.expectOne(apiUrl + '/:1');
+      const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('PATCH');
       req.flush(mockAbility);
     });
@@ -118,7 +118,7 @@ describe('AbilityService', () => {
           expect(err.status).toBe(404);
         }
       });
-      const req = httpMock.expectOne(apiUrl + '/:1');
+      const req = httpMock.expectOne(apiUrl + '/1');
       req.flush('Not found', { status: 404, statusText: 'Not Found' });
     });
   });
