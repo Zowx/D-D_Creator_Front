@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlignmentService {
-
-  constructor(private http: HttpClient) {}
-
-  //http://localhost:3000/alignments
+  constructor(private readonly http: HttpClient) {}
 
   getAllAlignments() {
     console.log('Fetching alignments from the server...');
-    return this.http.get<any[]>('http://localhost:3000/alignments');
+    return this.http.get<any[]>(`${environment.apiUrl}/alignments`);
   }
 }
