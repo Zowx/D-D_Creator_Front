@@ -1,28 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ClassesService } from './classes.service';
-import { Class } from '../../models/class.model';
+import { RacesService } from './races.service';
+import { Race } from '../../models/race.model';
 import { environment } from '../../../environments/environment';
 
-const apiUrl = environment.apiUrl + '/classes';
+const apiUrl = environment.apiUrl + '/races';
 
-describe('ClassesService', () => {
-  let service: ClassesService;
+describe('RacesService', () => {
+  let service: RacesService;
   let httpMock: HttpTestingController;
 
-  const mockClass: Class = {
+  const mockRace: Race = {
     id: '1',
-    name: 'Guerrier',
-    hitDice: 'd10',
-    savingThrows: ['1', '2'],
+    name: 'Elfe',
+    description: 'Description de la race',
+    traitsId: ['t1', 't2'],
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ClassesService]
+      providers: [RacesService]
     });
-    service = TestBed.inject(ClassesService);
+    service = TestBed.inject(RacesService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -34,17 +34,17 @@ describe('ClassesService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getClasses', () => {
-    it('should return classes (success)', () => {
-      service.getClasses().subscribe((classes) => {
-        expect(classes).toEqual([mockClass]);
+  describe('getRaces', () => {
+    it('should return races (success)', () => {
+      service.getRaces().subscribe((races) => {
+        expect(races).toEqual([mockRace]);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('GET');
-      req.flush([mockClass]);
+      req.flush([mockRace]);
     });
     it('should handle error', () => {
-      service.getClasses().subscribe({
+      service.getRaces().subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);
@@ -55,17 +55,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('getClassById', () => {
-    it('should return class by id (success)', () => {
-      service.getClassById('1').subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('getRaceById', () => {
+    it('should return race by id (success)', () => {
+      service.getRaceById('1').subscribe((race) => {
+        expect(race).toEqual(mockRace);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('GET');
-      req.flush(mockClass);
+      req.flush(mockRace);
     });
     it('should handle error', () => {
-      service.getClassById('1').subscribe({
+      service.getRaceById('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -76,17 +76,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('addClass', () => {
-    it('should add class (success)', () => {
-      service.addClass(mockClass).subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('addRace', () => {
+    it('should add race (success)', () => {
+      service.addRace(mockRace).subscribe((race) => {
+        expect(race).toEqual(mockRace);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('POST');
-      req.flush(mockClass);
+      req.flush(mockRace);
     });
     it('should handle error', () => {
-      service.addClass(mockClass).subscribe({
+      service.addRace(mockRace).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(400);
@@ -97,17 +97,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('updateClass', () => {
-    it('should update class (success)', () => {
-      service.updateClass('1', mockClass).subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('updateRace', () => {
+    it('should update race (success)', () => {
+      service.updateRace('1', mockRace).subscribe((race) => {
+        expect(race).toEqual(mockRace);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('PATCH');
-      req.flush(mockClass);
+      req.flush(mockRace);
     });
     it('should handle error', () => {
-      service.updateClass('1', mockClass).subscribe({
+      service.updateRace('1', mockRace).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -118,17 +118,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('deleteClass', () => {
-    it('should delete class (success)', () => {
-      service.deleteClass('1').subscribe((classe) => {
-        expect(classe).toBeTruthy();
+  describe('deleteRace', () => {
+    it('should delete race (success)', () => {
+      service.deleteRace('1').subscribe((race) => {
+        expect(race).toBeTruthy();
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('DELETE');
       req.flush({});
     });
     it('should handle error', () => {
-      service.deleteClass('1').subscribe({
+      service.deleteRace('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);

@@ -1,28 +1,34 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ClassesService } from './classes.service';
-import { Class } from '../../models/class.model';
+import { BackgroundService } from './background.service';
+import { Background } from '../../models/background.model';
 import { environment } from '../../../environments/environment';
 
-const apiUrl = environment.apiUrl + '/classes';
+const apiUrl = environment.apiUrl + '/backgrounds';
 
-describe('ClassesService', () => {
-  let service: ClassesService;
+describe('BackgroundService', () => {
+  let service: BackgroundService;
   let httpMock: HttpTestingController;
 
-  const mockClass: Class = {
+  const mockBackground: Background = {
     id: '1',
-    name: 'Guerrier',
-    hitDice: 'd10',
-    savingThrows: ['1', '2'],
+    name: 'Acolyte',
+    description: 'Description',
+    abilityChoice: 1,
+    skillsIds: [],
+    skillChoice: 1,
+    languagesIds: [],
+    languagesChoice: 1,
+    featureName: 'Feature',
+    featureDescription: 'Feature desc',
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ClassesService]
+      providers: [BackgroundService]
     });
-    service = TestBed.inject(ClassesService);
+    service = TestBed.inject(BackgroundService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -34,17 +40,17 @@ describe('ClassesService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getClasses', () => {
-    it('should return classes (success)', () => {
-      service.getClasses().subscribe((classes) => {
-        expect(classes).toEqual([mockClass]);
+  describe('getAllBackgrounds', () => {
+    it('should return backgrounds (success)', () => {
+      service.getAllBackgrounds().subscribe((backgrounds) => {
+        expect(backgrounds).toEqual([mockBackground]);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('GET');
-      req.flush([mockClass]);
+      req.flush([mockBackground]);
     });
     it('should handle error', () => {
-      service.getClasses().subscribe({
+      service.getAllBackgrounds().subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);
@@ -55,17 +61,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('getClassById', () => {
-    it('should return class by id (success)', () => {
-      service.getClassById('1').subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('getBackgroundById', () => {
+    it('should return background by id (success)', () => {
+      service.getBackgroundById('1').subscribe((background) => {
+        expect(background).toEqual(mockBackground);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('GET');
-      req.flush(mockClass);
+      req.flush(mockBackground);
     });
     it('should handle error', () => {
-      service.getClassById('1').subscribe({
+      service.getBackgroundById('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -76,17 +82,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('addClass', () => {
-    it('should add class (success)', () => {
-      service.addClass(mockClass).subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('addBackground', () => {
+    it('should add background (success)', () => {
+      service.addBackground(mockBackground).subscribe((background) => {
+        expect(background).toEqual(mockBackground);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('POST');
-      req.flush(mockClass);
+      req.flush(mockBackground);
     });
     it('should handle error', () => {
-      service.addClass(mockClass).subscribe({
+      service.addBackground(mockBackground).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(400);
@@ -97,17 +103,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('updateClass', () => {
-    it('should update class (success)', () => {
-      service.updateClass('1', mockClass).subscribe((classe) => {
-        expect(classe).toEqual(mockClass);
+  describe('updateBackground', () => {
+    it('should update background (success)', () => {
+      service.updateBackground('1', mockBackground).subscribe((background) => {
+        expect(background).toEqual(mockBackground);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('PATCH');
-      req.flush(mockClass);
+      req.flush(mockBackground);
     });
     it('should handle error', () => {
-      service.updateClass('1', mockClass).subscribe({
+      service.updateBackground('1', mockBackground).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -118,17 +124,17 @@ describe('ClassesService', () => {
     });
   });
 
-  describe('deleteClass', () => {
-    it('should delete class (success)', () => {
-      service.deleteClass('1').subscribe((classe) => {
-        expect(classe).toBeTruthy();
+  describe('deleteBackground', () => {
+    it('should delete background (success)', () => {
+      service.deleteBackground('1').subscribe((background) => {
+        expect(background).toBeTruthy();
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('DELETE');
       req.flush({});
     });
     it('should handle error', () => {
-      service.deleteClass('1').subscribe({
+      service.deleteBackground('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);

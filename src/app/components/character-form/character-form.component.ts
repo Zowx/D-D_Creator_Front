@@ -367,4 +367,8 @@ export class CharacterFormComponent implements OnInit {
 
     this.characterService.addCharacter(formData).subscribe();
   }
+
+  public getFormCharacter(): FormGroup {
+    return this.formCharacter;
+  }
 }
