@@ -13,9 +13,8 @@ export class LanguagesService {
   getLanguages() {
     return this.http.get<Language[]>(this.apiUrl + this.name);
   }
-
   getLanguageById(id: string) {
-    return this.http.get<Language>(this.apiUrl + this.name + '/:' + id);
+    return this.http.get<Language>(this.apiUrl + this.name + '/' + id);
   }
 
   addLanguage(language: Language) {
@@ -23,9 +22,9 @@ export class LanguagesService {
   }
 
   updateLanguage(id: string, language: Language) {
-    return this.http.patch<Language>(this.apiUrl + this.name + '/:' + id, language);
+    return this.http.patch<Language>(this.apiUrl + this.name + '/' + id, language);
   }
   deleteLanguage(id: string) {
-    return this.http.delete<Language>(this.apiUrl + this.name + '/:' + id);
+    return this.http.delete<Language>(this.apiUrl + this.name + '/' + id);
   }
 }

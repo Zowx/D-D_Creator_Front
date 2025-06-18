@@ -15,7 +15,7 @@ export class BackgroundService {
   }
 
   getBackgroundById(id: string) {
-    return this.http.get<Background>(this.apiUrl + this.name + '/:' + id);
+    return this.http.get<Background>(this.apiUrl + this.name + '/' + id);
   }
 
   addBackground(background: Background) {// todo change to dto
@@ -23,10 +23,10 @@ export class BackgroundService {
   }
 
   updateBackground(id: string, background: Background) { // todo change to dto
-    return this.http.patch<any>(this.apiUrl + this.name + '/:' + id, background);
+    return this.http.patch<any>(this.apiUrl + this.name + '/' + id, background);
   }
     
   deleteBackground(id: string) {
-    return this.http.delete<any>(this.apiUrl + this.name + '/:' + id);
+    return this.http.delete<any>(this.apiUrl + this.name + '/' + id);
   }
 }

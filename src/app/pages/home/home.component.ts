@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss', '../../shared/shared-style.scss'],
 })
 export class HomeComponent {
   // Logic for the Home page can be added here

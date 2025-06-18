@@ -1,87 +1,120 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
   FormArray,
   FormControl,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { LanguagesService } from '../../../services/languages/languages.service';
+import { Language } from '../../../models/language.model';
+
 @Component({
   selector: 'app-languages',
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    NgFor
-  ],
+  imports: [ReactiveFormsModule, CommonModule, NgFor],
   templateUrl: './languages.component.html',
-  styleUrls: ['./languages.component.scss', '../../../shared/shared-style.scss'],
+  styleUrls: [
+    './languages.component.scss',
+    '../../../shared/shared-style.scss',
+  ],
 })
-export class LanguagesComponent {
+export class LanguagesComponent implements OnInit {
   @Input() formLanguagesGroup!: FormGroup;
   languageList: string[] = [];
-  chosenLanguage: string[] = [];
-  
-  constructor(private formBuilder: FormBuilder,
-  private languagesService: LanguagesService) { }
-
-  initForm() : void {
-    this.formLanguagesGroup = this.formBuilder.group({
-      selectedLanguage: new FormControl(null)
-    });
-  }
+  languagesData: Language[] = [];
+  chosenLanguages: string[] = [];
+  selectedLanguagesData: Language[] = [];
+  maxLanguages: number = 2;
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly languagesService: LanguagesService
+  ) {}
 
   loadLanguages() {
-    this.languagesService.getLanguages().subscribe({  
+    this.languagesService.getLanguages().subscribe({
       next: (dataLanguages) => {
+        this.languagesData = dataLanguages;
         this.languageList = dataLanguages.map((language) => language.name);
-        console.log("les langages", this.languageList);
       },
       error: (err) => {
-        console.log(err);
+        console.error('Erreur lors du chargement des langues:', err);
       },
     });
   }
-  
-  get languages(): FormArray {  
-    return this.formLanguagesGroup.get('formLanguages.languages') as FormArray;
+
+  onLanguageChange(event: any, languageName: string) {
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      if (this.chosenLanguages.length >= this.maxLanguages) {
+        event.target.checked = false;
+        alert(
+          `Vous ne pouvez choisir que ${this.maxLanguages} langues maximum.`
+        );
+        return;
+      }
+      this.chosenLanguages.push(languageName);
+    } else {
+      this.chosenLanguages = this.chosenLanguages.filter(
+        (l) => l !== languageName
+      );
+    }
+
+    this.updateSelectedLanguagesData();
+
+    this.updateFormControl();
+  }
+
+  updateSelectedLanguagesData() {
+    this.selectedLanguagesData = this.languagesData.filter((language) =>
+      this.chosenLanguages.includes(language.name)
+    );
+  }
+
+
+  updateFormControl() {
+    // Obtenir le FormArray languages
+    const languagesFormArray = this.formLanguagesGroup.get(
+      'languages'
+    ) as FormArray;
+    if (languagesFormArray) {
+      // Vider le FormArray existant
+      while (languagesFormArray.length !== 0) {
+        languagesFormArray.removeAt(0);
+      }
+
+      // Ajouter les nouvelles langues sélectionnées
+      this.chosenLanguages.forEach((languageName) => {
+        languagesFormArray.push(new FormControl(languageName));
+      });
+    }
+
+    // Debug pour voir si la mise à jour fonctionne
+    console.log('Langues choisies:', this.chosenLanguages);
+    console.log('Valeur du FormArray languages:', languagesFormArray?.value);
+  }
+
+  isLanguageSelected(languageName: string): boolean {
+    return this.chosenLanguages.includes(languageName);
   }
   ngOnInit(): void {
     if (!this.formLanguagesGroup) {
-      this.formLanguagesGroup = this.formBuilder.group({
-        languages: [[]],
-      });
+      console.error("formLanguagesGroup n'est pas défini");
+      return;
     }
-    this.initForm();
+
     this.loadLanguages();
   }
-  
-  
+  get languages(): FormArray {
+    return this.formLanguagesGroup.get('languages') as FormArray;
+  }
+
   get selectedLanguage(): FormControl {
     return this.formLanguagesGroup.get('selectedLanguage') as FormControl;
   }
 
-  addLanguage(event: any, language: string) {
-    console.log('Language selected:', language);
-    const isChecked = event.target.checked;
-    if(isChecked){
-      if(this.chosenLanguage.length >=2) {
-        event.target.checked = false;
-        alert('Vous ne pouvez choisir que 2 languages.');
-        return;
-      }
-      this.chosenLanguage.push(language);
-    } else {
-      this.chosenLanguage = this.chosenLanguage.filter(l => l !== language);
-    }
-    this.formLanguagesGroup.patchValue({
-      languages: this.chosenLanguage,
-    });
-  }
-  
   onSubmit() {
     console.log('Form submitted!');
   }

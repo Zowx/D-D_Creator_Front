@@ -13,12 +13,8 @@ export class TraitsService {
   getTraits() {
     return this.http.get<Trait[]>(this.apiUrl + this.name);
   }
-
-  getTraitsByName(name: string) {
-    return this.http.get<Trait[]>(this.apiUrl + this.name + '/name/' + name);
-  }
   getTraitById(id: string) {
-    return this.http.get<Trait>(this.apiUrl + this.name + '/:' + id);
+    return this.http.get<Trait>(this.apiUrl + this.name + '/' + id);
   }
 
   addTrait(trait: Trait) {//todo ajouter dto
@@ -26,9 +22,9 @@ export class TraitsService {
   }
 
   updateTrait(id: string, trait: Trait) {//todo ajouter dto
-    return this.http.patch<Trait>(this.apiUrl + this.name + '/:' + id, trait);
+    return this.http.patch<Trait>(this.apiUrl + this.name + '/' + id, trait);
   }
   deleteTrait(id: string) {
-    return this.http.delete<Trait>(this.apiUrl + this.name + '/:' + id);
+    return this.http.delete<Trait>(this.apiUrl + this.name + '/' + id);
   }
 }

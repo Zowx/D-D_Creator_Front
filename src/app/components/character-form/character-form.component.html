@@ -2,15 +2,14 @@
   class="form-character"
   [formGroup]="formCharacter"
   (ngSubmit)="onSubmit()"
->
-  <!-- ================== Classes ================== -->
-  <app-classes [formClassesGroup]="formClasses"></app-classes>
-  <!-- ================= Races ================== -->
-  <app-races [formRacesGroup]="formRaces"></app-races>
+>  <!-- ================== Classes ================== -->
+  <app-classes #classesComponent [formClassesGroup]="formClassesGroup"></app-classes> 
+   <!-- ================= Races ================== -->
+   <app-races #racesComponent [formRacesGroup]="formRacesGroup"></app-races>
   <!-- ================== Backgrounds ================== -->
-  <app-backgrounds [formBackgroundsGroup]="formBackgrounds"></app-backgrounds>
+  <app-backgrounds #backgroundsComponent [formBackgroundsGroup]="formHistoriquesGroup"></app-backgrounds>
   <!-- ================== Langues ================== -->
-  <app-languages [formLanguagesGroup]="formLanguages"></app-languages>
+  <app-languages #languagesComponent [formLanguagesGroup]="formLanguagesGroup"></app-languages>
   <!-- ================== Caractéristiques ================== -->
   <app-characteristic
     [formCharacteristicsGroup]="formCharacteristics"
@@ -116,8 +115,10 @@
   </div>
 
   <!-- <app-classes formArrayName="classes"></app-classes>
-  <app-detail-form formArrayName="detail" [formDetail]="formCharacter.get('detail') as FormGroup" /> -->
-  <div class="form-actions">
-    <button class="btn-save" type="submit">Sauvegarder</button>
+  <app-detail-form formArrayName="detail" [formDetail]="formCharacter.get('detail') as FormGroup" /> -->  <div class="form-actions">
+    <div *ngIf="validationErrorMessage" class="validation-error-message">
+      {{ validationErrorMessage }}
+    </div>
+    <button class="btn-save" type="submit" >Sauvegarder</button>
   </div>
 </form>
