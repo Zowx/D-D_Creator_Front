@@ -35,9 +35,9 @@ describe('AbilityService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getAbility', () => {
+  describe('getAbilities', () => {
     it('should return abilities (success)', () => {
-      service.getAbility().subscribe((abilities) => {
+      service.getAbilities().subscribe((abilities) => {
         expect(abilities).toEqual([mockAbility]);
       });
       const req = httpMock.expectOne(apiUrl);
@@ -46,7 +46,7 @@ describe('AbilityService', () => {
     });
 
     it('should handle error', () => {
-      service.getAbility().subscribe({
+      service.getAbilities().subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);
@@ -62,7 +62,7 @@ describe('AbilityService', () => {
       service.getAbilityById('1').subscribe((ability) => {
         expect(ability).toEqual(mockAbility);
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       expect(req.request.method).toBe('GET');
       req.flush(mockAbility);
     });
@@ -74,7 +74,7 @@ describe('AbilityService', () => {
           expect(err.status).toBe(404);
         }
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       req.flush('Not found', { status: 404, statusText: 'Not Found' });
     });
   });
@@ -106,7 +106,7 @@ describe('AbilityService', () => {
       service.updateAbility('1', mockAbility).subscribe((ability) => {
         expect(ability).toEqual(mockAbility);
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       expect(req.request.method).toBe('PATCH');
       req.flush(mockAbility);
     });
@@ -118,7 +118,7 @@ describe('AbilityService', () => {
           expect(err.status).toBe(404);
         }
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       req.flush('Not found', { status: 404, statusText: 'Not Found' });
     });
   });
@@ -128,7 +128,7 @@ describe('AbilityService', () => {
       service.deleteAbility('1').subscribe((ability) => {
         expect(ability).toBeTruthy();
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       expect(req.request.method).toBe('DELETE');
       req.flush({});
     });
@@ -140,7 +140,7 @@ describe('AbilityService', () => {
           expect(err.status).toBe(500);
         }
       });
-      const req = httpMock.expectOne(apiUrl + '/1');
+      const req = httpMock.expectOne(apiUrl + '/:1');
       req.flush('Erreur serveur', { status: 500, statusText: 'Server Error' });
     });
   });

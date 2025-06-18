@@ -24,7 +24,7 @@ describe('ClassesComponent', () => {
 
   beforeEach(async () => {
     const classesSpy = jasmine.createSpyObj('ClassesService', ['getClasses']);
-    const abilitySpy = jasmine.createSpyObj('AbilityService', ['getAbility', 'getAbilityById']);
+    const abilitySpy = jasmine.createSpyObj('AbilityService', ['getAbilities', 'getAbilityById']);
     await TestBed.configureTestingModule({
       imports: [ClassesComponent, ReactiveFormsModule, HttpClientTestingModule],
       providers: [
@@ -68,14 +68,14 @@ describe('ClassesComponent', () => {
   });
 
   it('should load abilities successfully', () => {
-    abilityServiceSpy.getAbility.and.returnValue(of(mockAbilities));
+    abilityServiceSpy.getAbilities.and.returnValue(of(mockAbilities));
     component.loadAllAbilities();
     expect(component.allAbilities).toEqual(mockAbilities);
   });
 
   it('should handle error when loading abilities', () => {
     spyOn(console, 'error');
-    abilityServiceSpy.getAbility.and.returnValue(throwError(() => new Error('Erreur API')));
+    abilityServiceSpy.getAbilities.and.returnValue(throwError(() => new Error('Erreur API')));
     component.loadAllAbilities();
     expect(console.error).toHaveBeenCalled();
   });
