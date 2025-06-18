@@ -6,10 +6,10 @@ export interface Ability {
   name: string;
   description: string;
   short_desc: string;
-  skillid?: number;
-  skill?: Skill;
-  class?: Class[];
-  characterAbilities?: CharacterAbility[];
+  // skillid?: number;
+  // skill?: Skill;
+  // class?: Class[];
+  // characterAbilities?: CharacterAbility[];
 }
 
 // Assurez-vous que les interfaces Skill, Class et CharacterAbility existent ou importez-les si besoin.

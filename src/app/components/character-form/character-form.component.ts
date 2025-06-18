@@ -14,8 +14,9 @@ import { NgFor } from '@angular/common';
 import {ClassesComponent} from './classes/classes.component';
 import {RacesComponent} from './races/races.component'
 import {BackgroundsComponent} from './backgrounds/backgrounds.component';
-import {LanguagesComponent} from './languages/languages.component';
-import {AlignmentService} from '../../services/alignment/alignment.service';
+import { LanguagesComponent } from './languages/languages.component';
+import { CharacteristicComponent } from './characteristic/characteristic.component';
+import { AlignmentService } from '../../services/alignment/alignment.service';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +30,8 @@ import {AlignmentService} from '../../services/alignment/alignment.service';
     ClassesComponent,
     RacesComponent, 
     BackgroundsComponent,
-    LanguagesComponent
+    LanguagesComponent,
+    CharacteristicComponent
   ],
 })
 export class CharacterFormComponent implements OnInit { 
@@ -43,6 +45,8 @@ export class CharacterFormComponent implements OnInit {
   protected formRaces!: FormGroup;
   protected formBackgrounds!: FormGroup;
   protected formLanguages!: FormGroup;
+  protected formCharacteristics!: FormGroup;
+  protected formCaracteristics!: FormGroup;
   protected formEquipement!: FormGroup;
   protected formDetail!: FormGroup;  sexeOptions = ['Homme', 'Femme', 'Autre'];
   alignmentOptions: string[] = [];
@@ -80,6 +84,20 @@ export class CharacterFormComponent implements OnInit {
       }),
       formLanguages: this.formBuilder.group({
         selectedLanguage: new FormControl(null),
+        languages: this.formBuilder.array([]) 
+      }),
+      formCaracteristic: this.formBuilder.group({
+        force: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+        dexterite: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+        constitution: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+        intelligence: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+        sagesse: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+        charisme: new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]),
+      }),
+      formEquipement: this.formBuilder.group({
+        selectedArme: new FormControl(null),
+        selectedArmure: new FormControl(null),
+        equipements: this.formBuilder.array([]), 
         languages: this.formBuilder.array([], this.exactTwoLanguagesValidator) 
       }),
       detailCharacter: this.formBuilder.group({
@@ -130,6 +148,12 @@ export class CharacterFormComponent implements OnInit {
   }
   get formLanguagesGroup(): FormGroup {
     return this.formCharacter.get('formLanguages') as FormGroup;
+  }
+  get formCharacteristicGroup(): FormGroup {
+    return this.formCharacter.get('formCharacteristicGroup') as FormGroup;
+  }
+  get formEquipementGroup(): FormGroup {
+    return this.formCharacter.get('formEquipement') as FormGroup;
   }
   get detailCharacter(): FormGroup {
     return this.formCharacter.get('detail') as FormGroup;

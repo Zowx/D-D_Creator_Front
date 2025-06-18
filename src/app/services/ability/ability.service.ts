@@ -6,15 +6,16 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AbilityService {
   private name = '/abilities';
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
-  getAbility() {
+  getAbilities() {
     return this.http.get<Ability[]>(this.apiUrl + this.name);
   }
   getAbilityById(id: string) {
-    return this.http.get<Ability>(this.apiUrl + this.name + '/' + id);
+    return this.http.get<Ability>(this.apiUrl + this.name + '/:' + id);
   }
 
   addAbility(abilities: Ability) {// todo change to dto
@@ -22,10 +23,10 @@ export class AbilityService {
   }
 
   updateAbility(id: string, abilities: Ability) { // todo change to dto
-    return this.http.patch<Ability>(this.apiUrl + this.name + '/' + id, abilities);
+    return this.http.patch<Ability>(this.apiUrl + this.name + '/:' + id, abilities);
   }
     
   deleteAbility(id: string) {
-    return this.http.delete<Ability>(this.apiUrl + this.name + '/' + id);
+    return this.http.delete<Ability>(this.apiUrl + this.name + '/:' + id);
   }
 }

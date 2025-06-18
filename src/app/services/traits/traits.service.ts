@@ -11,7 +11,7 @@ export class TraitsService {
   constructor(private http: HttpClient) {}
 
   getTraits() {
-    return this.http.get<Trait>(this.apiUrl + this.name);
+    return this.http.get<Trait[]>(this.apiUrl + this.name);
   }
   getTraitById(id: string) {
     return this.http.get<Trait>(this.apiUrl + this.name + '/' + id);

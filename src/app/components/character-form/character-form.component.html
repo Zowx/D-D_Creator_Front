@@ -10,6 +10,8 @@
   <app-backgrounds #backgroundsComponent [formBackgroundsGroup]="formHistoriquesGroup"></app-backgrounds>
   <!-- ================== Langues ================== -->
   <app-languages #languagesComponent [formLanguagesGroup]="formLanguagesGroup"></app-languages>
+  <!-- ================== Caractéristiques ================== -->
+  <app-characteristic #characteristicComponent [formCharacteristicGroup]="formCharacteristicGroup"></app-characteristic>
   <!-- ================== Detail ================== -->
   <h1>Personnage</h1>
   <p>Définissez les derniers détails du personnage.</p>
@@ -18,7 +20,11 @@
       <div class="left-column">
         <div class="form-group">
           <h2>Nom</h2>
-          <input type="text" formControlName="nom" placeholder="Nom du personnage" />
+          <input
+            type="text"
+            formControlName="nom"
+            placeholder="Nom du personnage"
+          />
         </div>
 
         <div class="form-group">
@@ -47,12 +53,17 @@
             <input type="text" formControlName="poids" placeholder="80 kg" />
             <input type="number" formControlName="px" placeholder="0" />
           </div>
-        </div>        <div class="form-group">
+        </div>
+        <div class="form-group">
           <h2>Yeux / Peau / Cheveux</h2>
           <div class="form-row">
             <input type="text" formControlName="yeux" placeholder="Yeux" />
             <input type="text" formControlName="peau" placeholder="Peau" />
-            <input type="text" formControlName="cheveux" placeholder="Cheveux" />
+            <input
+              type="text"
+              formControlName="cheveux"
+              placeholder="Cheveux"
+            />
           </div>
         </div>
 
