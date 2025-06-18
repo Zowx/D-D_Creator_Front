@@ -19,7 +19,7 @@ export class CharacterService {
       return this.http.get<Character>(this.apiUrl + this.name + '/' + id);
     }
   
-    addCharacter(character: Character) {
+    addCharacter(character: any) {
       return this.http.post<any>(this.apiUrl + this.name, character);
     }
   

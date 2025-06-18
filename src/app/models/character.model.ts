@@ -1,10 +1,3 @@
-import { Race } from './race.model';
-import { Class } from './class.model';
-import { Background } from './background.model';
-import { Alignment } from './alignment.model';
-import { CharacterAbility } from './characterability.model';
-import { CharacterLanguage } from './characterlanguage.model';
-
 export interface Character {
   id: string;
   raceId: string;

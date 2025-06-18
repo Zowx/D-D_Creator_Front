@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   FormControl,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { NgFor } from '@angular/common';
 import { BackgroundService } from '../../../services/background/background.service';
 import { Background } from '../../../models/background.model';
@@ -32,7 +32,7 @@ export class BackgroundsComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly backgroundsService: BackgroundService
-  ) {}
+  ) { }
 
   loadBackgrounds() {
     this.backgroundsService.getAllBackgrounds().subscribe({
@@ -47,7 +47,7 @@ export class BackgroundsComponent implements OnInit {
   }
   onBackgroundSelected(backgroundName: string) {
     this.selectedBackgroundData = this.backgroundsData.find(bg => bg.name === backgroundName) || null;
-    
+
     // Mettre a jour le FormCcontrol avec les donnees completes du background
     const selectedBackgroundDataControl = this.formBackgroundsGroup.get('selectedHistoriqueData');
     if (selectedBackgroundDataControl) {
@@ -64,8 +64,8 @@ export class BackgroundsComponent implements OnInit {
 
     // Charger les donnees nécessaires
     this.loadBackgrounds();
-    
-    
+
+
     const selectedBackgroundControl = this.formBackgroundsGroup.get('selectedHistorique');
     if (selectedBackgroundControl) {
       selectedBackgroundControl.valueChanges.subscribe(selectedBackgroundName => {
@@ -84,12 +84,20 @@ export class BackgroundsComponent implements OnInit {
     console.log('Form submitted!');
   }
 
-    public getBackground(id: string){
+  public getBackground(id: string) {
     const background = this.backgroundsData.find((c) => c.id == id);
     if (background) {
       return background.name;
     } else {
       return null;
     }
+  }
+
+  public getBackgroundId(name: string) {
+    const backgroundId = this.backgroundsData.find((c) => c.name === name);
+    if (backgroundId) {
+      return backgroundId.id;
+    }
+    return null;
   }
 }

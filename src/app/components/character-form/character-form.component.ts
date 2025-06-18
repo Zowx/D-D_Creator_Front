@@ -74,42 +74,7 @@ export class CharacterFormComponent implements OnInit {
     this.initForm();
     this.loadAlignmentOptions();
     this.getAllCharacters();
-    this.characterListe = [
-      {
-        id: "1",
-        raceId: "1",
-        classId: "5",
-        backgroundId: "1",
-        alignmentId: "1",
-        userId: 'user123',
-
-        xp: 1200,
-        level: 3,
-        name: 'Tharion',
-        player: 'Alice',
-        AC: 15,
-        speed: 30,
-        hp: 28,
-        maxHp: 28,
-        tempHp: 5,
-        personality: 'Brave and loyal',
-        ideals: 'Justice and honor',
-        bonds: 'Sworn to protect his homeland',
-        flaws: 'Reckless in battle',
-        age: 27,
-        height: '6ft',
-        weight: '180 lbs',
-        eyes: 'Green',
-        skin: 'Tan',
-        hair: 'Black',
-        appearance: 'Wears a worn leather armor with a family crest',
-        allies: 'Companions from the Silver Guard',
-        backstory: 'Former soldier turned adventurer after his village was attacked.',
-        treasure: 'An enchanted sword passed down from his father',
-        traits: 'Keen senses, fearless',
-        languages: ['1', '2']
-      }
-    ];
+    this.loadCharacterData();
   }
 
   initForm(): void {
@@ -179,6 +144,17 @@ export class CharacterFormComponent implements OnInit {
     });
   }
 
+  loadCharacterData(): void {
+    this.characterService.getAllCharacter().subscribe({
+      next: (data) => {
+        this.characterListe = data;
+      },
+      error: (err) => {
+        console.error('Error fetching characters:', err);
+      }
+    });
+  }
+
   getAllCharacters(): void {
     this.characterService.getAllCharacter().subscribe({
       next: (data) => {
@@ -195,6 +171,7 @@ export class CharacterFormComponent implements OnInit {
     if (!this.selectedCharacter) return;
 
     this.languagesComponent?.setLanguagesData(this.selectedCharacter.languages || []);
+    console.log('Selected character:', this.selectedCharacter.classId);
 
     // Mettre à jour le formulaire avec les données du personnage sélectionné
     this.formCharacter.patchValue({
@@ -209,10 +186,6 @@ export class CharacterFormComponent implements OnInit {
       formHistoriques: {
         selectedHistorique: this.backgroundsComponent?.getBackground(this.selectedCharacter.backgroundId),
         selectedHistoriqueData: null
-      },
-      formLanguages: {
-        selectedLanguage: this.languagesComponent?.getLanguages(this.selectedCharacter.languages),
-        languages: []
       },
       detailCharacter: {
         nom: this.selectedCharacter.name,
@@ -355,131 +328,43 @@ export class CharacterFormComponent implements OnInit {
       console.log("probleme");
       return;
     }
-
-    const selectedClassData = this.classesComponent?.selectedClasseData || null;
-    const selectedSubClassData = this.classesComponent?.selectedSubClass || null;
-    const selectedClassSavingThrows = this.classesComponent?.selectedClasseSavingThrows || [];
-    const selectedRaceData = this.racesComponent?.selectedRaceData || null;
-    const selectedSubRaceData = this.racesComponent?.selectedSubRace || null;
-    const selectedBackgroundData = this.backgroundsComponent?.selectedBackgroundData || null;
-    const selectedLanguagesData = this.languagesComponent?.selectedLanguagesData || [];
-
-
+    
     //Collecte toute les données du formulaire avec les objets complets
     const formData = {
-      classes: {
-        selectedClasse: this.formCharacter.get('formClasses.selectedClasse')?.value,
-        selectedSubClass: this.formCharacter.get('formClasses.selectedSubClass')?.value,
-        selectedClassData: selectedClassData,
-        selectedSubClassData: selectedSubClassData,
-        selectedClassSavingThrows: selectedClassSavingThrows
-      },
-      races: {
-        selectedRace: this.formCharacter.get('formRaces.selectedRace')?.value,
-        selectedSubRace: this.formCharacter.get('formRaces.selectedSubRace')?.value,
-        selectedRaceData: selectedRaceData,
-        selectedSubRaceData: selectedSubRaceData
-      },
-      backgrounds: {
-        selectedHistorique: this.formCharacter.get('formHistoriques.selectedHistorique')?.value,
-        selectedHistoriqueData: selectedBackgroundData
-      },
-      languages: {
-        selectedLanguage: this.formCharacter.get('formLanguages.selectedLanguage')?.value,
-        languages: this.formCharacter.get('formLanguages.languages')?.value || [],
-        selectedLanguagesData: selectedLanguagesData
-      },
-      detailCharacter: {
-        nom: this.formCharacter.get('detailCharacter.nom')?.value,
-        sexe: this.formCharacter.get('detailCharacter.sexe')?.value,
-        alignment: this.formCharacter.get('detailCharacter.alignment')?.value,
-        age: this.formCharacter.get('detailCharacter.age')?.value,
-        taille: this.formCharacter.get('detailCharacter.taille')?.value,
-        poids: this.formCharacter.get('detailCharacter.poids')?.value,
-        px: this.formCharacter.get('detailCharacter.px')?.value,
-        yeux: this.formCharacter.get('detailCharacter.yeux')?.value,
-        peau: this.formCharacter.get('detailCharacter.peau')?.value,
-        cheveux: this.formCharacter.get('detailCharacter.cheveux')?.value,
-        apparence: this.formCharacter.get('detailCharacter.apparence')?.value,
-        histoire: this.formCharacter.get('detailCharacter.histoire')?.value,
-        traits: this.formCharacter.get('detailCharacter.traits')?.value,
-        ideaux: this.formCharacter.get('detailCharacter.ideaux')?.value,
-        liens: this.formCharacter.get('detailCharacter.liens')?.value,
-        defauts: this.formCharacter.get('detailCharacter.defauts')?.value,
-        allies: this.formCharacter.get('detailCharacter.allies')?.value,
-        capacites: this.formCharacter.get('detailCharacter.capacites')?.value
-      },
-      Caractéristiques: {
-        force: this.formCharacteristicGroup.get('force')?.value,
-        dexterite: this.formCharacteristicGroup.get('dexterite')?.value,
-        constitution: this.formCharacteristicGroup.get('constitution')?.value,
-        intelligence: this.formCharacteristicGroup.get('intelligence')?.value,
-        sagesse: this.formCharacteristicGroup.get('sagesse')?.value,
-        charisme: this.formCharacteristicGroup.get('charisme')?.value
-      }
+      classId: this.classesComponent?.getClassesId(this.formCharacter.get('formClasses.selectedClasse')?.value),
+      raceId: this.racesComponent?.getRacesId(this.formCharacter.get('formRaces.selectedRace')?.value),      
+      backgroundId: this.backgroundsComponent?.getBackgroundId(this.formCharacter.get('formHistoriques.selectedHistorique')?.value),   
+      languageIds: this.languagesComponent?.chosenLanguages || [],
+      alignmentId: this.formCharacter.get('detailCharacter.alignment')?.value,
+      userId: 'NotImplemented', // Remplacer par l'ID de l'utilisateur connecté
+      xp: 0,
+      level: 1,
+      name: this.formCharacter.get('detailCharacter.nom')?.value,
+      player: 'NotImplemented', // Remplacer par le nom de l'utilisateur connect
+      AC: 10, // Valeur par défaut, peut être modifiée plus tard
+      speed: 9, // Valeur par défaut, peut être modifiée plus tard
+      hp: 14, // Valeur par défaut, peut être modifiée plus tard
+      maxHp: 14, // Valeur par défaut, peut être modifiée plus tard
+      tempHp: 0, // Valeur par défaut, peut être modifiée plus tard
+      personality: this.formCharacter.get('detailCharacter.traits')?.value,
+      ideals: this.formCharacter.get('detailCharacter.ideaux')?.value,
+      bonds: this.formCharacter.get('detailCharacter.liens')?.value,
+      flaws: this.formCharacter.get('detailCharacter.defauts')?.value,
+      age: this.formCharacter.get('detailCharacter.age')?.value,
+      height: this.formCharacter.get('detailCharacter.taille')?.value,
+      weight: this.formCharacter.get('detailCharacter.poids')?.value,
+      eyes: this.formCharacter.get('detailCharacter.yeux')?.value,
+      skin: this.formCharacter.get('detailCharacter.peau')?.value,
+      hair: this.formCharacter.get('detailCharacter.cheveux')?.value,
+      appearance: this.formCharacter.get('detailCharacter.apparence')?.value,
+      allies: this.formCharacter.get('detailCharacter.allies')?.value,
+      backstory: this.formCharacter.get('detailCharacter.histoire')?.value,
+      treasure: '', // Valeur par défaut, peut être modifiée plus tard
+      traits: this.formCharacter.get('detailCharacter.traits')?.value,
+      skillIds: [], // Non implémenté, à remplir plus tard
+      abilities: [], // Non implémenté, à remplir plus tard
     };
 
-    //Créer un tableau avec toute les données 
-    const characterDataArray = [
-      {
-        section: 'Classes',
-        selection: {
-          selectedClasse: formData.classes.selectedClasse,
-          selectedSubClass: formData.classes.selectedSubClass,
-
-        },
-        completeData: {
-          classeComplete: formData.classes.selectedClassData,
-          subClasseComplete: formData.classes.selectedSubClassData,
-          selectedClassSavingThrows: formData.classes.selectedClassSavingThrows
-        }
-      }, {
-        section: 'Races',
-        selection: {
-          selectedRace: formData.races.selectedRace,
-          selectedSubRace: formData.races.selectedSubRace
-        },
-        completeData: {
-          raceComplete: formData.races.selectedRaceData,
-          subRaceComplete: formData.races.selectedSubRaceData
-        }
-      },
-      {
-        section: 'Backgrounds',
-        selection: {
-          selectedHistorique: formData.backgrounds.selectedHistorique
-        },
-        completeData: {
-          historiqueComplete: formData.backgrounds.selectedHistoriqueData
-        }
-      },
-      {
-        section: 'Languages',
-        selection: {
-          selectedLanguage: formData.languages.selectedLanguage,
-          languages: formData.languages.languages
-        },
-        completeData: {
-          languagesComplete: formData.languages.selectedLanguagesData
-        }
-      },
-      {
-        section: 'Détails du personnage',
-        selection: formData.detailCharacter
-      },
-      {
-        section: 'Caractéristiques',
-        selection: {
-          force: this.formCharacteristicGroup.get('force')?.value,
-          dexterite: this.formCharacteristicGroup.get('dexterite')?.value,
-          constitution: this.formCharacteristicGroup.get('constitution')?.value,
-          intelligence: this.formCharacteristicGroup.get('intelligence')?.value,
-          sagesse: this.formCharacteristicGroup.get('sagesse')?.value,
-          charisme: this.formCharacteristicGroup.get('charisme')?.value
-        },
-      }
-    ];
-
-    console.log('Données du personnage:', characterDataArray);
+    this.characterService.addCharacter(formData).subscribe();
   }
 }

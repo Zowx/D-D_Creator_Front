@@ -129,4 +129,11 @@ export class RacesComponent implements OnInit {
     }
   }
 
+  public getRacesId(name: string) {
+    const raceId = this.mainRaces.find((c) => c.name === name);
+    if (raceId) {
+      return raceId.id;
+    }
+    return null;
+  }
 }

@@ -175,4 +175,13 @@ export class ClassesComponent implements OnInit {
       return null;
     }
   }
+
+  public getClassesId(name: string) {
+    const classe = this.mainClasses.find((c) => c.name === name);
+    if (classe) {
+      return classe.id;
+    } else {
+      return null;
+    }
+  }
 }

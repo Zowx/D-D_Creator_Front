@@ -109,10 +109,6 @@ export class LanguagesComponent implements OnInit {
         languagesFormArray.push(new FormControl(languageName));
       });
     }
-
-    // Debug pour voir si la mise à jour fonctionne
-    console.log('Langues choisies:', this.chosenLanguages);
-    console.log('Valeur du FormArray languages:', languagesFormArray?.value);
   }
 
   isLanguageSelected(languageName: string): boolean {
