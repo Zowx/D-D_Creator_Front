@@ -106,7 +106,7 @@ export class ClassesComponent implements OnInit {
         console.log('Recherche des abilities par ID dans le cache local');
         //trouver les abilities
         savingThrowIds.forEach((id) => {
-          const ability = this.allAbilities.find((a) => a.id === id.toString());
+          const ability = this.allAbilities.find((a) => a.id.toString() === id.toString());
           if (ability) {
             this.selectedClasseSavingThrows.push(ability);
           }

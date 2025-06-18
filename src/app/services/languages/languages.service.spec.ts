@@ -1,29 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { AbilityService } from './ability.service';
-import { Ability } from '../../models/ability.model';
+import { LanguagesService } from './languages.service';
+import { Language } from '../../models/language.model';
 import { environment } from '../../../environments/environment';
 
-const apiUrl = environment.apiUrl + '/abilities';
+const apiUrl = environment.apiUrl + '/languages';
 
-describe('AbilityService', () => {
-  let service: AbilityService;
+describe('LanguagesService', () => {
+  let service: LanguagesService;
   let httpMock: HttpTestingController;
 
-  const mockAbility: Ability = {
+  const mockLanguage: Language = {
     id: 1,
-    name: 'Force',
-    description: 'Description',
-    short_desc: 'Desc',
+    name: 'Elvish',
+    description: 'Langue des elfes',
+    exotic: false,
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AbilityService]
+      providers: [LanguagesService]
     });
-    service = TestBed.inject(AbilityService);
+    service = TestBed.inject(LanguagesService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -35,18 +34,17 @@ describe('AbilityService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getAbility', () => {
-    it('should return abilities (success)', () => {
-      service.getAbility().subscribe((abilities) => {
-        expect(abilities).toEqual([mockAbility]);
+  describe('getLanguages', () => {
+    it('should return languages (success)', () => {
+      service.getLanguages().subscribe((languages) => {
+        expect(languages).toEqual([mockLanguage]);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('GET');
-      req.flush([mockAbility]);
+      req.flush([mockLanguage]);
     });
-
     it('should handle error', () => {
-      service.getAbility().subscribe({
+      service.getLanguages().subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);
@@ -57,18 +55,17 @@ describe('AbilityService', () => {
     });
   });
 
-  describe('getAbilityById', () => {
-    it('should return ability by id (success)', () => {
-      service.getAbilityById('1').subscribe((ability) => {
-        expect(ability).toEqual(mockAbility);
+  describe('getLanguageById', () => {
+    it('should return language by id (success)', () => {
+      service.getLanguageById('1').subscribe((language) => {
+        expect(language).toEqual(mockLanguage);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('GET');
-      req.flush(mockAbility);
+      req.flush(mockLanguage);
     });
-
     it('should handle error', () => {
-      service.getAbilityById('1').subscribe({
+      service.getLanguageById('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -79,18 +76,17 @@ describe('AbilityService', () => {
     });
   });
 
-  describe('addAbility', () => {
-    it('should add ability (success)', () => {
-      service.addAbility(mockAbility).subscribe((ability) => {
-        expect(ability).toEqual(mockAbility);
+  describe('addLanguage', () => {
+    it('should add language (success)', () => {
+      service.addLanguage(mockLanguage).subscribe((language) => {
+        expect(language).toEqual(mockLanguage);
       });
       const req = httpMock.expectOne(apiUrl);
       expect(req.request.method).toBe('POST');
-      req.flush(mockAbility);
+      req.flush(mockLanguage);
     });
-
     it('should handle error', () => {
-      service.addAbility(mockAbility).subscribe({
+      service.addLanguage(mockLanguage).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(400);
@@ -101,18 +97,17 @@ describe('AbilityService', () => {
     });
   });
 
-  describe('updateAbility', () => {
-    it('should update ability (success)', () => {
-      service.updateAbility('1', mockAbility).subscribe((ability) => {
-        expect(ability).toEqual(mockAbility);
+  describe('updateLanguage', () => {
+    it('should update language (success)', () => {
+      service.updateLanguage('1', mockLanguage).subscribe((language) => {
+        expect(language).toEqual(mockLanguage);
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('PATCH');
-      req.flush(mockAbility);
+      req.flush(mockLanguage);
     });
-
     it('should handle error', () => {
-      service.updateAbility('1', mockAbility).subscribe({
+      service.updateLanguage('1', mockLanguage).subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(404);
@@ -123,18 +118,17 @@ describe('AbilityService', () => {
     });
   });
 
-  describe('deleteAbility', () => {
-    it('should delete ability (success)', () => {
-      service.deleteAbility('1').subscribe((ability) => {
-        expect(ability).toBeTruthy();
+  describe('deleteLanguage', () => {
+    it('should delete language (success)', () => {
+      service.deleteLanguage('1').subscribe((language) => {
+        expect(language).toBeTruthy();
       });
       const req = httpMock.expectOne(apiUrl + '/1');
       expect(req.request.method).toBe('DELETE');
       req.flush({});
     });
-
     it('should handle error', () => {
-      service.deleteAbility('1').subscribe({
+      service.deleteLanguage('1').subscribe({
         next: () => fail('should have failed'),
         error: (err) => {
           expect(err.status).toBe(500);
