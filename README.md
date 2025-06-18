@@ -81,13 +81,6 @@ src/
 - **Equipment Tracker**: Inventory management interface
 - **Notes & Roleplay**: Character personality and backstory editor
 
-### 🔐 User Experience
-
-- **Authentication**: Login/register forms with validation
-- **Responsive Design**: Mobile-first responsive layout
-- **Dark/Light Mode**: Theme switcher
-- **Progressive Web App**: Offline capabilities
-
 ### 🎨 UI Components
 
 - **Reusable Components**: Modular and reusable UI elements
@@ -335,14 +328,6 @@ Set these environment variables in your hosting platform:
 - **Component Testing**: Test component logic and rendering
 - **Service Testing**: Test business logic and API calls
 
-### E2E Testing (Future)
-
-- **Framework**: Cypress (planned)
-- **User Flows**: Test complete user journeys
-- **Cross-browser**: Test on multiple browsers
-
----
-
 ## 📦 Dependencies Overview
 
 ### Core Dependencies
@@ -397,29 +382,6 @@ Set these environment variables in your hosting platform:
 - [ ] Spell slot management
 - [ ] Equipment visualization
 - [ ] Campaign integration
-
----
-
-## 🤝 Contributing
-
-### Development Workflow
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Follow Angular style guide
-4. Write tests for new features
-5. Ensure all tests pass: `pnpm test`
-6. Commit changes: `git commit -m 'Add amazing feature'`
-7. Push to branch: `git push origin feature/amazing-feature`
-8. Create a Pull Request
-
-### Code Standards
-
-- Follow Angular Style Guide
-- Use TypeScript strict mode
-- Write meaningful commit messages
-- Add JSDoc comments for public APIs
-- Maintain test coverage above 80%
 
 ---
 
